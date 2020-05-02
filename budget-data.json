@@ -11,12 +11,12 @@
             "rate": 0,
             "children": [
               {
-                "name": "A.F 1",
+                "name": "Cool",
                 "rate": 0.02,
                 "value": 113
               },
               {
-                "name": "A.F 2",
+                "name": "Waw",
                 "rate": -2.92,
                 "value": 222
               },

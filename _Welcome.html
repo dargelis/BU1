@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://10.196.68.224:99/bu/TimeRegV1.php -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Welcome</title>
+    <link rel="stylesheet" href="./Welcome_files/AlexStyle.css">
+
+    <link rel="stylesheet" href="./Welcome_files/font-awesome.min.css">
+
+    <script src="./Welcome_files/jquery.min.js"></script>
+
+    <script src="./Welcome_files/popper.min.js"></script>
+
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="./Welcome_files/bootstrap.min.css">
+    <script src="./Welcome_files/bootstrap.min.js"></script>
+
+
+    <!-- datatables -->
+    <script src="./Welcome_files/jquery.dataTables.min.js"></script>
+    <script src="./Welcome_files/dataTables.buttons.min.js"></script>
+    <link rel="stylesheet" href="./Welcome_files/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="./Welcome_files/buttons.dataTables.min.css">        
+  
+
+    <style type="text/css">
+        body{ font: 14px sans-serif; text-align: left; }
+        .bs{
+            margin: 20px;
+        }
+        .navbar{
+            margin-bottom: 1rem;
+        }
+
+        #partnerlist tr td {
+          line-height: 0.9  ; 
+          width: 10;
+          font-size: 11px;
+          cursor: pointer;
+        }
+
+
+        #example tbody tr:hover {
+          cursor: pointer;
+        }    
+
+
+    </style>
+</head>
+<body class="">
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+     <div class="collapse navbar-collapse" id="navbarCollapse">
+         <div class="navbar-nav">
+                <a href="http://10.196.68.224:99/bu/partnerV1.php" class="nav-item nav-link ">Partners</a>
+                <a href="http://10.196.68.224:99/bu/main.php" class="nav-item nav-link">Main</a>
+                <a href="http://10.196.68.224:99/bu/TimeRegV1.php" class="nav-item nav-link">Time registration</a>
+                <a href="http://10.196.68.224:99/bu/register.php" class="nav-item nav-link">Create user</a>
+         </div>
+         <form class="form-inline ml-auto">
+                <!-- <input type="text" class="form-control mr-sm-2" placeholder="Search">
+                <button type="submit" class="btn btn-outline-light">Search</button> -->
+                <a href="http://10.196.68.224:99/bu/logout.php" class="nav-item nav-link">Logout alex</a>                
+            </form>         
+     </div>
+ </nav>
+
+
+
+
+
+<table border="1" cellpadding="10">
+
+
+<tbody><tr>
+    <!-- <td>
+        <label for="DateList1">Date</label>
+        <select id="DateList1">
+        </select><br> -->
+    <td>
+      <div id="user_days1_wrapper" class="dataTables_wrapper no-footer"></div><table id="user_days1" class="display compact user_days1 dataTable no-footer">
+                <thead>
+                    <tr role="row"><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 80px;">Date</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15px;">Hours</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 15px;">Details</th></tr>
+                </thead>
+      <tbody><tr role="row" class="odd"><td>2019.12.02 Mon</td><td><input type="text" name="in20191202" id="in20191202" value="2.0" size="5" onchange="UpdInsDays($(this));"></td><td><button type="button" id="btWBD20191202" onclick="SetModalWithValue($(this));" class="btn btn-primary" style="font-size:0.8em" data-toggle="modal" data-target="#myModal">WBD</button></td></tr><tr role="row" class="even"><td>2019.12.01 Sun</td><td><input type="text" name="in20191201" id="in20191201" value="2.0" size="5" onchange="UpdInsDays($(this));"></td><td><button type="button" id="btWBD20191201" onclick="SetModalWithValue($(this));" class="btn btn-primary" style="font-size:0.8em" data-toggle="modal" data-target="#myModal">WBD</button></td></tr><tr role="row" class="odd"><td>2019.11.30 Sat</td><td><input type="text" name="in20191130" id="in20191130" value="1.0" size="5" onchange="UpdInsDays($(this));"></td><td><button type="button" id="btWBD20191130" onclick="SetModalWithValue($(this));" class="btn btn-primary" style="font-size:0.8em" data-toggle="modal" data-target="#myModal">WBD</button></td></tr><tr role="row" class="even"><td>2019.11.29 Fri</td><td><input type="text" name="in20191129" id="in20191129" value="4.0" size="5" onchange="UpdInsDays($(this));"></td><td><button type="button" id="btWBD20191129" onclick="SetModalWithValue($(this));" class="btn btn-primary" style="font-size:0.8em" data-toggle="modal" data-target="#myModal">WBD</button></td></tr><tr role="row" class="odd"><td>2019.11.28 Thu</td><td><input type="text" name="in20191128" id="in20191128" value="3.0" size="5" onchange="UpdInsDays($(this));"></td><td><button type="button" id="btWBD20191128" onclick="SetModalWithValue($(this));" class="btn btn-primary" style="font-size:0.8em" data-toggle="modal" data-target="#myModal">WBD</button></td></tr><tr role="row" class="even"><td>2019.11.27 Wed</td><td><input type="text" name="in20191127" id="in20191127" value="3.0" size="5" onchange="UpdInsDays($(this));"></td><td><button type="button" id="btWBD20191127" onclick="SetModalWithValue($(this));" class="btn btn-primary" style="font-size:0.8em" data-toggle="modal" data-target="#myModal">WBD</button></td></tr><tr role="row" class="odd"><td>2019.11.26 Tue</td><td><input type="text" name="in20191126" id="in20191126" value="3.0" size="5" onchange="UpdInsDays($(this));"></td><td><button type="button" id="btWBD20191126" onclick="SetModalWithValue($(this));" class="btn btn-primary" style="font-size:0.8em" data-toggle="modal" data-target="#myModal">WBD</button></td></tr><tr role="row" class="even"><td>2019.11.25 Mon</td><td><input disabled="" type="text" name="in20191125" id="in20191125" value="8.0" size="5" onchange="UpdInsDays($(this));"></td><td><button type="button" id="btWBD20191125" onclick="SetModalWithValue($(this));" class="btn btn-primary" style="font-size:0.8em" data-toggle="modal" data-target="#myModal">WBD</button></td></tr><tr role="row" class="odd"><td>2019.11.24 Sun</td><td><input disabled="" type="text" name="in20191124" id="in20191124" value="4.0" size="5" onchange="UpdInsDays($(this));"></td><td><button type="button" id="btWBD20191124" onclick="SetModalWithValue($(this));" class="btn btn-primary" style="font-size:0.8em" data-toggle="modal" data-target="#myModal">WBD</button></td></tr><tr role="row" class="even"><td>2019.11.23 Sat</td><td><input disabled="" type="text" name="in20191123" id="in20191123" value="1.0" size="5" onchange="UpdInsDays($(this));"></td><td><button type="button" id="btWBD20191123" onclick="SetModalWithValue($(this));" class="btn btn-primary" style="font-size:0.8em" data-toggle="modal" data-target="#myModal">WBD</button></td></tr></tbody></table>
+
+
+    
+<!-- <tr>
+<td valign="top" align="left" style=""  width="200px"   height="150px" > 
+<td>
+<tr>
+<td valign="top" align="left" height="200px">
+  
+<td valign="top" align="left" height="100px"> -->
+</td></tr></tbody></table>
+
+
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Works breakdown <div id="WBDDate">20191125</div></h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        <div id="WBDTable_wrapper" class="dataTables_wrapper"></div><table id="WBDTable" class="display compact WBDTable dataTable">
+                    <thead>
+                        <tr role="row"><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 100px;">Area</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 50px;">Project or description (3-7 words)</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 20px;">Percent</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 20px;">Hours</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 20px;"></th></tr>
+                    </thead>
+                    <tfoot>
+                      <tr><th rowspan="1" colspan="1"></th><th rowspan="1" colspan="1"></th><th rowspan="1" colspan="1"></th><th rowspan="1" colspan="1"><div id="totalCalcHours">8.00</div></th><th rowspan="1" colspan="1"></th></tr>
+                    </tfoot>
+          <tbody><tr role="row" class="odd"><td> <select id="selsc4tdvcdx" onchange="saveWBD();" class="areaSEL"><option value="1">iScala functionality support</option><option value="2">iScala online integrations</option><option value="3">iScala offline integrations</option><option value="4">iScala data management</option><option value="5">iScala documents/layout adjustment</option><option value="6">iScala modifications</option><option value="7">iScala automation tool</option><option value="8">Warehouse systems  &amp; 3PL</option><option value="9">Other systems</option><option value="10">QlikView</option><option value="11">Meeting</option><option value="12">Other</option><option value="13">Workstations</option><option value="14">Servers\Cloud</option><option value="15">Backups</option><option value="16" selected="">Security network\servers</option><option value="17">Security workstation</option><option value="18">Networks</option><option value="19">Phonesystems</option><option value="20">Office equipment support (printers, coppiers,etc)</option></select></td><td><input type="text" name="WBDinsc4tdvcdx" id="WBDinsc4tdvcdx" value="csacasdc" size="30" onchange="saveWBD();" class="projINP"></td><td><input type="text" name="WBDinsc4tdvcdx" id="WBDinsc4tdvcdx" class="percentCLS" value="0" size="3" onchange="saveWBD();"></td><td><input type="text" name="WBDinsc4tdvcdx" id="WBDinsc4tdvcdx" class="hoursCLS" value="1.0" size="3" onchange="saveWBD();"></td><td><input type="image" name="WBDimgsc4tdvcdx" id="WBDimgsc4tdvcdx" class="removeCLS" src="./Welcome_files/remove.png" width="20" height="20" onclick="RemoveRow($(this));"> </td></tr><tr role="row" class="even"><td> <select id="selc63i8gmyv" onchange="saveWBD();" class="areaSEL"><option value="1">iScala functionality support</option><option value="2">iScala online integrations</option><option value="3">iScala offline integrations</option><option value="4">iScala data management</option><option value="5">iScala documents/layout adjustment</option><option value="6">iScala modifications</option><option value="7">iScala automation tool</option><option value="8">Warehouse systems  &amp; 3PL</option><option value="9">Other systems</option><option value="10">QlikView</option><option value="11">Meeting</option><option value="12">Other</option><option value="13">Workstations</option><option value="14">Servers\Cloud</option><option value="15">Backups</option><option value="16">Security network\servers</option><option value="17">Security workstation</option><option value="18" selected="">Networks</option><option value="19">Phonesystems</option><option value="20">Office equipment support (printers, coppiers,etc)</option></select></td><td><input type="text" name="WBDinc63i8gmyv" id="WBDinc63i8gmyv" value="333" size="30" onchange="saveWBD();" class="projINP"></td><td><input type="text" name="WBDinc63i8gmyv" id="WBDinc63i8gmyv" class="percentCLS" value="0" size="3" onchange="saveWBD();"></td><td><input type="text" name="WBDinc63i8gmyv" id="WBDinc63i8gmyv" class="hoursCLS" value="1.0" size="3" onchange="saveWBD();"></td><td><input type="image" name="WBDimgc63i8gmyv" id="WBDimgc63i8gmyv" class="removeCLS" src="./Welcome_files/remove.png" width="20" height="20" onclick="RemoveRow($(this));"> </td></tr><tr role="row" class="odd"><td> <select id="selslk1ryz5x" onchange="saveWBD();" class="areaSEL"><option value="1">iScala functionality support</option><option value="2">iScala online integrations</option><option value="3">iScala offline integrations</option><option value="4">iScala data management</option><option value="5">iScala documents/layout adjustment</option><option value="6">iScala modifications</option><option value="7">iScala automation tool</option><option value="8">Warehouse systems  &amp; 3PL</option><option value="9">Other systems</option><option value="10">QlikView</option><option value="11">Meeting</option><option value="12" selected="">Other</option><option value="13">Workstations</option><option value="14">Servers\Cloud</option><option value="15">Backups</option><option value="16">Security network\servers</option><option value="17">Security workstation</option><option value="18">Networks</option><option value="19">Phonesystems</option><option value="20">Office equipment support (printers, coppiers,etc)</option></select></td><td><input type="text" name="WBDinslk1ryz5x" id="WBDinslk1ryz5x" value="22" size="30" onchange="saveWBD();" class="projINP"></td><td><input type="text" name="WBDinslk1ryz5x" id="WBDinslk1ryz5x" class="percentCLS" value="0" size="3" onchange="saveWBD();"></td><td><input type="text" name="WBDinslk1ryz5x" id="WBDinslk1ryz5x" class="hoursCLS" value="2.0" size="3" onchange="saveWBD();"></td><td><input type="image" name="WBDimgslk1ryz5x" id="WBDimgslk1ryz5x" class="removeCLS" src="./Welcome_files/remove.png" width="20" height="20" onclick="RemoveRow($(this));"> </td></tr><tr role="row" class="even"><td> <select id="selczvdt7vrx" onchange="saveWBD();" class="areaSEL"><option value="1">iScala functionality support</option><option value="2">iScala online integrations</option><option value="3">iScala offline integrations</option><option value="4">iScala data management</option><option value="5">iScala documents/layout adjustment</option><option value="6">iScala modifications</option><option value="7">iScala automation tool</option><option value="8">Warehouse systems  &amp; 3PL</option><option value="9">Other systems</option><option value="10">QlikView</option><option value="11">Meeting</option><option value="12">Other</option><option value="13">Workstations</option><option value="14">Servers\Cloud</option><option value="15">Backups</option><option value="16">Security network\servers</option><option value="17" selected="">Security workstation</option><option value="18">Networks</option><option value="19">Phonesystems</option><option value="20">Office equipment support (printers, coppiers,etc)</option></select></td><td><input type="text" name="WBDinczvdt7vrx" id="WBDinczvdt7vrx" value="33" size="30" onchange="saveWBD();" class="projINP"></td><td><input type="text" name="WBDinczvdt7vrx" id="WBDinczvdt7vrx" class="percentCLS" value="0" size="3" onchange="saveWBD();"></td><td><input type="text" name="WBDinczvdt7vrx" id="WBDinczvdt7vrx" class="hoursCLS" value="3.0" size="3" onchange="saveWBD();"></td><td><input type="image" name="WBDimgczvdt7vrx" id="WBDimgczvdt7vrx" class="removeCLS" src="./Welcome_files/remove.png" width="20" height="20" onclick="RemoveRow($(this));"> </td></tr><tr role="row" class="odd"><td> <select id="selic50wbvbp" onchange="saveWBD();" class="areaSEL"><option value="1">iScala functionality support</option><option value="2">iScala online integrations</option><option value="3">iScala offline integrations</option><option value="4">iScala data management</option><option value="5">iScala documents/layout adjustment</option><option value="6">iScala modifications</option><option value="7">iScala automation tool</option><option value="8">Warehouse systems  &amp; 3PL</option><option value="9">Other systems</option><option value="10">QlikView</option><option value="11">Meeting</option><option value="12">Other</option><option value="13">Workstations</option><option value="14">Servers\Cloud</option><option value="15">Backups</option><option value="16">Security network\servers</option><option value="17" selected="">Security workstation</option><option value="18">Networks</option><option value="19">Phonesystems</option><option value="20">Office equipment support (printers, coppiers,etc)</option></select></td><td><input type="text" name="WBDinic50wbvbp" id="WBDinic50wbvbp" value="33" size="30" onchange="saveWBD();" class="projINP"></td><td><input type="text" name="WBDinic50wbvbp" id="WBDinic50wbvbp" class="percentCLS" value="0" size="3" onchange="saveWBD();"></td><td><input type="text" name="WBDinic50wbvbp" id="WBDinic50wbvbp" class="hoursCLS" value="1.0" size="3" onchange="saveWBD();"></td><td><input type="image" name="WBDimgic50wbvbp" id="WBDimgic50wbvbp" class="removeCLS" src="./Welcome_files/remove.png" width="20" height="20" onclick="RemoveRow($(this));"> </td></tr></tbody></table>
+
+
+  
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <div id="totalExpected">8.0</div>
+          <button type="button" class="btn btn-secondary" onclick="AddEmptyRowWBDTable();">Add</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+
+   
+
+
+
+
+
+
+
+
+
+<script>
+
+var DaysTable;
+var WBDTable;
+
+var username = 'alex';
+
+function FncFillDates() {
+  $("#DateList1").empty();
+  //clean the table
+  //$("#myTBLCUST > tbody").html("");
+  $.ajax({
+                type: "POST",
+                url: "getDataV1.php",
+                dataType: "json",
+                data: { 
+                  QRY:"LASTDATES1" }, 
+                success: function (result) {
+                    //console.log(result);
+                    for (var i in result) {
+                        $('#DateList1').append('<option value="' + result[i]["DT"]+'">' + result[i]["DT"] +' '+ result[i]["WD"] +'</option>');
+                    }
+                },
+                error: function (response) {
+                    alert('error');
+                }
+            });
+}
+
+function BindDaysTable() {
+    DaysTable = $("#user_days1").DataTable({
+        "deferRender": true,
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "sDom": '',
+        "columnDefs": [
+            { "width": "80px", "targets": 0 },
+            { "width": "15px", "targets": 1 },
+            { "width": "15px", "targets": 2 },
+            ]
+    });
+}    
+function PopulateDaysTable() {
+    $.ajax({
+        type: "POST",
+        url: "getDataV1.php",
+        dataType: "json",
+        data: { QRY:"USERDAYS1", PARAM:username },         
+        success: function (response) {
+            //console.log(response);
+            var jsonObject = JSON.parse(JSON.stringify(response));
+            var result = jsonObject.map(function (item) {
+                var result = [];
+                result.push(item.DT);   
+                result.push("<input "+item.VISIBILITY+" type='text' name='in"+item.ROWKEY+"' id='in"+item.ROWKEY
+                            +"' value='"+item.WORKING_HOURS+"' size='5' onchange='UpdInsDays($(this));' >");
+                result.push("<button type='button' id='btWBD"+item.ROWKEY
+                            +"' onClick='SetModalWithValue($(this));' class='btn btn-primary' style='font-size:0.8em' data-toggle='modal' data-target='#myModal'>WBD</button>");
+                return result;
+            });
+            DaysTable.rows.add(result);
+            DaysTable.draw();
+        },
+        failure: function () {
+            $("#user_days1").append(" Error when fetching data please contact administrator");
+        }
+    });
+
+    
+
+}
+
+function BindWBDTable() {
+      WBDTable = $("#WBDTable").DataTable({
+        "deferRender": true,
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "sDom": '',
+        "columnDefs": [
+            { "width": "100px", "targets": 0 },
+            { "width": "50px", "targets": 1 },
+            { "width": "20px", "targets": 2 },
+            { "width": "20px", "targets": 3 },
+            { "width": "20px", "targets": 4 },
+            ]
+    });
+}  
+
+function PopulateWBDTable(UN, DT) {
+    $.ajax({
+        type: "POST",
+        url: "getDataV1.php",
+        dataType: "json",
+        data: { QRY:"USERWBD1", PARAM1:UN, PARAM2:DT },         
+        success: function (response) {
+            //console.log(response);
+            var jsonObject = JSON.parse(JSON.stringify(response));
+            var result = jsonObject.map(function (item) {
+                var result = [];
+                //result.push("<input type='text' name='0in"+item.ROWKEY+"' id='0in"+item.ROWKEY+"' value='"+item.AREA+"' size='20'  >");
+                result.push(" <select id='sel"+item.ROWKEY+"' onchange='saveWBD();' class='areaSEL'></select>");
+                //set selection boxed and set def values 
+                GetAllAreas('sel'+item.ROWKEY,item.AREA);
+
+                result.push("<input type='text' name='WBDin"+item.ROWKEY+"' id='WBDin"+item.ROWKEY+"' value='"+item.PROJ+"' size='30' onchange='saveWBD();' class='projINP'>");   
+                //result.push("<input type='text' name='WBDin"+item.ROWKEY+"' id='WBDin"+item.ROWKEY+"' class='percentCLS' value='"+item.PERCENTS+"' size='3'  >");
+                result.push("<input type='text' name='WBDin"+item.ROWKEY+"' id='WBDin"+item.ROWKEY+"' class='percentCLS' value='0' size='3' onchange='saveWBD();'  >");
+                result.push("<input type='text' name='WBDin"+item.ROWKEY+"' id='WBDin"+item.ROWKEY+"' class='hoursCLS' value='"+item.HOURS+"' size='3' onchange='saveWBD();' >");
+                result.push("<input type='image' name='WBDimg"+item.ROWKEY+"' id='WBDimg"+item.ROWKEY+"' class='removeCLS' src='remove.png'  width='20' height='20' onclick='RemoveRow($(this));'> ");
+                return result;
+            });
+
+            WBDTable.rows.add(result);
+            WBDTable.draw();
+
+            $("#totalExpected").html($("#in"+DT ).val());
+            $("#WBDDate").html(DT);
+            
+            calculateHoursSum();
+        },
+        failure: function () {
+            $("#WBDTable").append(" Error when fetching data please contact administrator");
+        }
+    });
+}
+
+function saveWBD(){
+  //var row= [];
+  //var changes= new Array($('.areaSEL').length);
+  var changes= {};
+  var x;
+
+    //recording in array date,areas, work id
+    x = 0;
+    $(".areaSEL").each(function () {
+      changes[x]= {};           
+      changes[x]['DT']=$("#WBDDate").html();
+      changes[x]['AREA_ID']=this.value;
+      changes[x]['WORK_ID']=this.id.replace('sel','');      
+      x=x+1;
+    });
+
+    //recording in array projects
+    x = 0;
+    $(".projINP").each(function () {
+      changes[x]['PROJ']=this.value;
+      x=x+1;
+    });    
+
+    //recording in array hours
+    x = 0;
+    $(".hoursCLS").each(function () {
+      changes[x]['HR']=this.value;
+      x=x+1;
+    }); 
+
+  //console.log(changes);
+
+  //MAKE cycle with AJAX for recording to DB
+  $.ajax({
+                type: "POST",
+                url: "insDataV1.php",
+                dataType: "json",
+                data: {
+                    QRY:"INS_UPD_WBD",
+                    UN: username,
+                    ARR: JSON.stringify(changes)    ///convert array to JSON
+                  }  
+                  , 
+                success: function (response) {
+                  console.log(response);
+                },
+                error: function (response) {
+                  alert('DB ins/upd error');
+                }
+            });
+
+}
+
+
+
+function AddEmptyRowWBDTable() {
+  
+  var NewWorkID = Math.random().toString(36).substr(2, 9);
+  // alert("second "+NewWorkID);
+  // var WBDid = 123;
+  var result = [];
+  result.push(" <select id='sel"+NewWorkID+"'  onchange='saveWBD();' class='areaSEL'></select>");
+  // //set selection boxed and set def values 
+  GetAllAreas('sel'+NewWorkID,'12');
+
+  result.push("<input type='text' name='WBDin"+NewWorkID+"' id='WBDin"+NewWorkID+"' class='projINP' value='' size='30' onchange='saveWBD();'  >");   
+  result.push("<input type='text' name='WBDin"+NewWorkID+"' id='WBDin"+NewWorkID+"' class='percentCLS' value='0' size='3' onchange='saveWBD();'  >");
+  result.push("<input type='text' name='WBDin"+NewWorkID+"' id='WBDin"+NewWorkID+"' class='hoursCLS' value='0' size='3' onchange='saveWBD();'  >");
+  result.push("<input type='image' name='WBDimg"+NewWorkID+"' id='WBDimg"+NewWorkID+"' class='removeCLS' src='remove.png'  width='20' height='20' onclick='RemoveRow($(this));'> ");
+
+  WBDTable.row.add( result ).draw();
+  
+}
+function RemoveRow(Obj){
+  // alert(Obj.attr('id')+'-'+Obj.val());
+  // alert(Obj.parents('tr'));
+  var row = WBDTable.row( Obj.parents('tr') );
+  row.remove();
+  WBDTable.draw();
+  saveWBD();
+
+}
+
+
+function UpdInsDays(Obj){
+  FncInsDays(Obj.attr('id').slice(2, 10 ), username, Obj.val());
+}
+
+
+function SetModalWithValue(Obj){
+
+  WBDTable.clear();
+  PopulateWBDTable(username,Obj.attr('id').slice(5, 13));
+  
+}
+
+
+function GetAllAreas(objname,DefVal){
+
+  var SelectionSign;
+  $("#"+objname).empty();
+  
+  $.ajax({
+                type: "POST",
+                url: "getDataV1.php",
+                dataType: "json",
+                data: { 
+                  QRY:"GET_ALL_AREAS" }, 
+                success: function (result) {
+                    //console.log(result);
+                    for (var i in result) {
+                        SelectionSign = "";
+                        if (result[i]["ID"] == DefVal) {
+                          SelectionSign = " selected ";
+                        }
+                        $('#'+objname).append('<option value="' + result[i]["ID"] +'" '+ SelectionSign +'>' + result[i]["AREA"]  +'</option>');
+                    }
+                },
+                error: function (response) {
+                    alert('error');
+                }
+            });
+
+}
+
+
+
+
+// function AddRow(){
+//   $('#CollapsibleTBL').append('<tr><td>test<td><input type="text" class="inp" value="0"  style= "width:160px;"><td>test3<td>test4<td>test5</tr>');
+//   alert("row added");
+//   calculateSum();
+// }
+
+
+
+function calculateHoursSum() {
+  var sum = 0;
+    //iterate through each textboxes and add the values
+    $(".hoursCLS").each(function () {
+        //add only if the value is number
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+    });
+    $("#totalCalcHours").html(sum.toFixed(2));
+
+    
+    // if ($("#totalExpected").html()==sum) {
+    //   alert("match");
+    // }
+    // else {
+    //   alert("doens't match");
+    // };
+    //alert($("#totalExpected").html());
+
+    //  $("#totalHours")
+    //alert(sum.toFixed(2))
+
+}
+
+//Record days
+function FncInsDays(DT, UN, DAYS) {
+
+  $.ajax({
+                type: "POST",
+                url: "insDataV1.php",
+                dataType: "json",
+                data: { 
+                  PARAM1:DT,
+                  PARAM2:UN,
+                  PARAM3:DAYS,
+                  QRY:"INS_DAYS" }, 
+
+                success: function (result) {
+                  //alert('inserted');
+                    //console.log(result);
+                    // for (var i in result) {
+                    //     $('#myProducts').append('<option value="' + result[i]["SC"] +'">' + result[i]["SCDESC"] +'</option>');
+                    // }
+                },
+                error: function (response) {
+                  alert('DB ins/upd error');
+                }
+            });
+}
+
+$(document).ready(function() {
+ 
+    //FncFillDates();
+    
+    BindDaysTable();
+    PopulateDaysTable();
+    
+    BindWBDTable();
+
+
+    $("#WBDTable").on("keyup", ".hoursCLS", function () {
+      calculateHoursSum ();
+    });
+
+ 
+
+    // //click on value in table
+    // $('#user_days1 tbody').on('click', 'td', function () {
+    //         var data = DaysTable.row( this ).data();
+    //         var datatmp = data[1];
+    //         //console.log(DaysTable.row( this ).data());
+    //         alert(datatmp);
+    // } ); 
+
+
+});
+
+// insert into TIMEREG_WBD values ('alex','2019-11-26','BI','QV Sales',15,2)
+// select * from TIMEREG_WBD
+
+</script>
+
+
+
+
+
+</body></html>

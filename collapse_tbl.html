@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+
+    <title>data tables</title>
+    
+	<!--
+    <link rel="stylesheet" href="datatables.min.css" >	    
+    <script src="jquery-3.3.1.min.js" ></script>
+    <script src="datatables.min.js" ></script>
+    -->
+
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" >
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.dataTables.min.css" >
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
+
+	<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" ></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js" ></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js" ></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+	<style>
+
+ 
+
+
+        .Mytable .clickable.collapsed:after {
+            background: url('details_open.png') no-repeat center center;
+            content: "\f077"; 
+		        font-family: 'FontAwesome'; 
+            width: 100px;
+            float: left; 
+        }
+        .Mytable .clickable:after {
+            background: url('details_close.png') no-repeat center center;
+			      
+            width: 100px;
+            float: left; 
+            content: "\f078"; 
+		        font-family: 'FontAwesome';            
+        }
+
+        /* .myopen {
+          content: "open"; 
+	           
+          background: url('details_open.png') no-repeat center center;          
+        }
+        .myclose {
+          content: "close"; 
+         
+          background: url('details_close.png') no-repeat center center;          
+        }	 */
+
+        body {
+        color: #6a6c6f;
+        background-color: #f1f3f6;
+        margin-top: 30px;
+        }
+
+		
+		.mb-0 a {
+		  display: block;
+		  position: relative;
+		}
+		.mb-0 a:after {
+		  content: "\f078"; 
+		  font-family: 'FontAwesome';
+		  
+		  position: absolute;
+		  right: 0;
+		}
+		.mb-0 a[aria-expanded="true"]:after {
+		  content: "\f077";  
+		  
+}		
+		
+	</style>	
+  </head>
+  <body>
+
+    <img src="dog.jpg" alt="" class="rounded-circle">
+
+
+        <div class="row-fluid summary">
+                <div class="span11">
+                    <h2>MyHeading</h2>  
+                </div>
+                <div class="span1">
+                    <button id="intro-switch" class="btn btn-success collapsed" data-toggle="collapse" data-target="#intro">++</button>
+                </div>
+            </div>
+            <div class="row-fluid summary">
+                <div id="intro" class="collapse"> 
+                    Here comes the text...<br>
+                    <a id="details-switch" class="collapsed" data-toggle="collapse" href="#details">Show details</a>
+                    <div id="details" class="collapse">
+                        More details...
+                    </div>
+                </div>
+            </div>
+
+
+
+        <table class="Mytable collapsed" id="CollapsibleTBL" border=1> 
+                <thead>
+                    <tr>
+                        <th>Column</th>
+                        <th>Column</th>
+                        <th>Column</th>
+                        <th>Column</th>
+                        <th>Column</th>
+                    </tr>
+                </thead>
+         
+                <tbody>
+                    <tr class="clickable collapsed" data-toggle="collapse" data-target="#group-of-rows-1" style="cursor: pointer;">
+                        <td class="myopen"></td>
+                        <td><input type="text" class="inp" value="123"  style= "width:160px;"/></td>
+                        <td>data</td>  
+                        <td>data</td>
+                        <td>data</td>
+                    </tr>
+                </tbody>
+
+                <tbody  id="group-of-rows-1" class="collapse hide"> 
+                    <tr class="clickable collapsed" data-toggle="collapse" data-target="#group-of-rows-11" style="cursor: pointer;">
+                        <td class="myclose"></td>
+                        <td><input type="text" class="inp" value="321"  style= "width:160px;"/></td>
+                        <td>data 1</td>  
+                        <td>data 1</td>
+                        <td>data 1</td>
+                    </tr>
+                </tbody>
+
+                <tbody id="group-of-rows-11" class="collapse hide"> 
+                        <tr class="clickable collapsed" data-toggle="collapse" data-target="#group-of-rows-111" style="cursor: pointer;">
+                            <td class="myclose"></td>
+                            <td><input type="text" class="inp" value="32.12"  style= "width:160px;"/></td>
+                            <td></td>  
+                            <td>data 11</td>
+                            <td>data 11</td>
+                        </tr>
+                </tbody> 
+                <tbody id="group-of-rows-111" class="collapse hide"> 
+                  <tr >
+                      <td></td>
+                      <td></td>
+                      <td></td>  
+                      <td></td>
+                      <td>data 111</td>
+                  </tr>
+          </tbody>   
+
+          
+          <tfoot>
+            <tr>
+                <th>Column</th>
+                <th><div id="result">Column<div></th>
+                <th>Column</th>
+                <th>Column</th>
+                <th>Column</th>
+            </tr>
+          </tfoot>
+            </table>
+
+            <button  onclick="AddRow()">Add Row</button>
+
+            <button id="button" >Toggle Expand/Collapse</button>
+            <div id="wrapper" >
+              <ul id="list">
+                <li>Item</li>
+                <li>Item</li>
+                <li>Item</li>
+                <li>Item</li>
+              </ul>
+            </div>
+            
+
+			
+			
+			
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="heading-1">
+      <h5 class="mb-0 ">
+        <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+          Item 1
+        </a>
+      </h5>
+    </div>
+    <div id="collapse-1" class="collapse show" data-parent="#accordion" aria-labelledby="heading-1">
+      <div class="card-body">
+
+        <div id="accordion-1">
+          <div class="card">
+            <div class="card-header" id="heading-1-1">
+              <h5 class="mb-0">
+                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-1-1" aria-expanded="false" aria-controls="collapse-1-1">
+                  Item 1 > 1
+                </a>
+              </h5>
+            </div>
+            <div id="collapse-1-1" class="collapse show" data-parent="#accordion-1" aria-labelledby="heading-1-1">
+              <div class="card-body">
+
+                  <div id="accordion-1-1">
+                    <div class="card">
+                      <div class="card-header" id="heading-1-1-1">
+                        <h5 class="mb-0">
+                          <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-1-1-1" aria-expanded="false" aria-controls="collapse-1-1-1">
+                            Item 1 > 1 > 1
+                          </a>
+                        </h5>
+                      </div>
+                      <div id="collapse-1-1-1" class="collapse" data-parent="#accordion-1-1" aria-labelledby="heading-1-1-1">
+                        <div class="card-body">
+                          Text 1 > 1 > 1 body
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" id="heading-1-1-2">
+                        <h5 class="mb-0">
+                          <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-1-1-2" aria-expanded="false" aria-controls="collapse-1-1-2">
+                            Item 1 > 1 > 2
+                          </a>
+                        </h5>
+                      </div>
+                      <div id="collapse-1-1-2" class="collapse" data-parent="#accordion-1-1" aria-labelledby="heading-1-1-2">
+                        <div class="card-body">
+                          Text 1 > 1 > 2 body
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card">
+                      <div class="card-header" id="heading-1-1-3">
+                        <h5 class="mb-0">
+                          <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-1-1-3" aria-expanded="false" aria-controls="collapse-1-1-3">
+                            Item 1 > 1 > 3
+                          </a>
+                        </h5>
+                      </div>
+                      <div id="collapse-1-1-3" class="collapse" data-parent="#accordion-1-1" aria-labelledby="heading-1-1-3">
+                        <div class="card-body">
+                          Text 1 > 1 > 3 body
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card">
+            <div class="card-header" id="heading-1-2">
+              <h5 class="mb-0">
+                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-1-2" aria-expanded="false" aria-controls="collapse-1-2">
+                  Item 1 > 2 title
+                </a>
+              </h5>
+            </div>
+            <div id="collapse-1-2" class="collapse" data-parent="#accordion-1" aria-labelledby="heading-1-2">
+              <div class="card-body">
+                Text 1 > 2 body
+              </div>
+            </div>
+          </div>
+        </div>      
+      
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+  <h5 class="mb-0">
+    <a class="collapsed"  data-toggle="collapse " href="#collapse-1-5" >
+      Item 1 > 5 title
+    </a>
+  </h5>
+
+  <div id="collapse-1-5" class="collapse" data-parent="#accordion-1" >
+    <div class="card-body">
+      Text 1 > 5 body
+    </div>
+  </div>
+
+  </body>
+  
+</html>
+
+
+	<script>
+
+function AddRow(){
+  $('#CollapsibleTBL').append('<tr><td>test<td><input type="text" class="inp" value="0"  style= "width:160px;"><td>test3<td>test4<td>test5</tr>');
+  alert("row added");
+  calculateSum();
+}
+
+
+
+function calculateSum() {
+  var sum = 0;
+    //iterate through each textboxes and add the values
+    $(".inp").each(function () {
+        //add only if the value is number
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+    });
+    $("#result").html(sum.toFixed(2));
+
+}
+
+
+
+//working
+$(document).ready(function(){
+  
+  $("#CollapsibleTBL").on("click", "tbody tr", function (event) {
+    var $row = $(this).closest("tr"),        // Finds the closest row <tr> 
+    $tds = $row.find("td:nth-child(1)"); // Finds the 2nd <td> element
+    //$tds.html('<b>test</b>');
+
+
+    if($(this).hasClass('collapsed')){
+      $tds.html('<b>open</b><img src="details_close.png" >');  
+      $(this).closest("tr").find("td:nth-child(1)").removeClass('myclose');
+      $(this).closest("tr").find("td:nth-child(1)").addClass('myopen');        
+    
+      
+      //$(this).addClass('myopen');
+    }  
+    else{
+      $tds.html('<b>close</b><img src="details_open.png" >');
+      $(this).closest("tr").find("td:nth-child(1)").removeClass('myopen');
+      $(this).closest("tr").find("td:nth-child(1)").addClass('myclose');   
+
+     //$(this).addClass('myopen');
+    };
+    $(this).find('input[type=text]').each(function () {
+                //alert(this.value);
+                calculateSum();
+                //if (!isNaN(this.value) && this.value.length != 0) {
+                //    sum += parseFloat(this.value);
+                //}
+            });     
+ 
+
+
+
+
+
+});
+
+$("#CollapsibleTBL").on("keyup", ".inp", function () {
+  calculateSum();
+});
+
+
+
+
+
+
+  $("#CollapsibleTBL").on("hide.bs.collapse", function(){
+    //$(".openclose").html('<img src="details_close.png">');
+    //var $row = $(this).closest("tr"),        // Finds the closest row <tr> 
+    //$tds = $row.find("td:nth-child(4)"); // Finds the 2nd <td> element
+        //$(this).find("td").each(function () {
+       //alert($(this).text());
+    //});
+  });
+  $("#CollapsibleTBL").on("show.bs.collapse", function(){
+    $(this).find("td").each(function () {
+       //alert($(this).text());
+    });
+    //$(".openclose").html('<img src="details_open.png">');
+  });
+});	
+	
+
+$('#button').click(function(){
+    $('#wrapper').toggle();
+})
+
+
+// WORKING WELL
+$(".btn[data-toggle='collapse']").click(function() {
+
+
+            if ($(this).text() == '++') {
+                $(this).text('--');
+            } else {
+                $(this).text('++');
+            }
+        });
+
+$('#CollapsibleTBL').on('hidden.bs.collapse', function () {
+//alert("Collapse tbl");
+})
+
+$('#CollapsibleTBL').on('shown.bs.collapse', function () {
+//alert("Show tbl");
+})
+
+
+
+
+	</script>

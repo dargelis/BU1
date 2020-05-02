@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://10.196.68.224:99/bu/BU_ProfilesV1.php -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+    <!-- <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'> -->
+
+
+    <title>Welcome</title>
+
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="./Welcome_files/jquery-3.4.1.min.js"></script>
+    <!-- CKEditor -->
+    <script src="./Welcome_files/ckeditor.js"></script><style>.cke{visibility:hidden;}</style>
+    <!-- <script  src="_ckeditor/adapters/jquery.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> -->
+
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="./Welcome_files/bootstrap.min.css">
+    <script src="./Welcome_files/bootstrap.min.js"></script>
+
+
+    <!-- datatables -->
+    <script src="./Welcome_files/jquery.dataTables.min.js"></script>
+    <script src="./Welcome_files/dataTables.buttons.min.js"></script>
+    <link rel="stylesheet" href="./Welcome_files/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="./Welcome_files/buttons.dataTables.min.css">    
+    <!-- D3 -->
+    <script src="./Welcome_files/d3.v4.min.js"></script>
+
+
+
+    <style type="text/css">
+    </style>
+    <link rel="stylesheet" href="./Welcome_files/AlexStyle.css">
+    <script src="./Welcome_files/AlexSys.js"></script>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+     <div class="collapse navbar-collapse" id="navbarCollapse">
+         <div class="navbar-nav">
+                <a href="http://10.196.68.224:99/bu/partnerV1.php" class="nav-item nav-link ">Partners</a>
+                <a href="http://10.196.68.224:99/bu/main.php" class="nav-item nav-link">Main</a>
+                <a href="http://10.196.68.224:99/bu/TimeRegV1.php" class="nav-item nav-link">Time registration</a>
+                <a href="http://10.196.68.224:99/bu/BU_ProfilesV1.php" class="nav-item nav-link">BU Profiles</a>
+                <a href="http://10.196.68.224:99/bu/register.php" class="nav-item nav-link">Create user</a>
+                <select id="AllUsername" onchange="ChangeUser()">
+                <option value=""></option><option value=""></option><option value="aivar">aivar</option><option value="alex">alex</option><option value="Alexey">Alexey</option><option value="nikita">nikita</option><option value="ojars">ojars</option><option value="ricardas">ricardas</option></select>
+                <!-- <button onclick="ChangeUser()" id="btnChangeUser">Switch user</button> -->
+         </div>
+         <form class="form-inline ml-auto">
+                <!-- <input type="text" class="form-control mr-sm-2" placeholder="Search">
+                <button type="submit" class="btn btn-outline-light">Search</button> -->
+                <a href="http://10.196.68.224:99/bu/logout.php" class="nav-item nav-link">Logout alex</a>                
+            </form>         
+     </div>
+ </nav>
+ <script type="text/javascript">
+
+
+
+  //    $("#AllUsername").empty();
+  //clean the table
+  //$("#myTBLCUST > tbody").html("");
+  function FillInUserDropdown(){
+    $.ajax({
+                    type: "POST",
+                    url: "getDataV1.php",
+                    dataType: "json",
+                    data: { 
+                    QRY:"ALL_USERS" }, 
+                    success: function (result) {
+                        //console.log(result);
+                            for (var i in result) {
+                                $('#AllUsername').append('<option value="' + result[i]["USERNAME"] +'">' + result[i]["USERNAME"] +'</option>');
+                            }
+                    },
+                    error: function (response) {
+                        alert('error');
+                    }
+                });
+  }
+
+function ChangeUser(){
+    if ($('#AllUsername').val()!==""){
+        document.cookie = "username="+$('#AllUsername').val();
+        var x = document.cookie; 
+        console.log(x);
+
+        
+        location.reload();
+    }
+}
+
+$(document).ready(function() {
+    FillInUserDropdown();
+});
+
+
+
+
+ </script>
+
+
+
+
+
+<table border="1" cellpadding="10">
+
+<tbody><tr>
+    <td valign="top">
+        <label for="FinYear">Company &amp; Financial year</label>
+            <select id="FinYear" onchange="LoadProfilesDT();"><option value="" selected=""></option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select><br>
+
+         
+            <button type="button" class="btn btn-secondary" onclick="FncFillInInputSuppliers(document.getElementById(&quot;Country&quot;).value,document.getElementById(&quot;inSUP&quot;));">Get Suppliers to var</button>
+            <div class="autocomplete"><input type="text" name="inSUP" id="inSUP" value="" size="30" onchange="" class="inSUP"></div>
+<br>
+            <button type="button" class="btn btn-secondary" onclick="FncFillInInputCorporation(document.getElementById(&quot;inCORP&quot;));">Get corporations to var</button>
+            <div class="autocomplete"><input type="text" name="inCORP" id="inCORP" value="" size="30" onchange="" class="inCORP"></div>
+
+
+    </td><td valign="top">
+</td></tr><tr>
+    <td valign="top">
+        <div id="ProfilesTable_wrapper" class="dataTables_wrapper"></div><table id="ProfilesTable" class="display compact ProfilesTable dataTable">
+                        <thead>
+                            <tr role="row"><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 50px;">CORPORATION</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 50px;">ANT COUNTRY</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 20px;">SUPPLIERS IDs</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 20px;">ERP GL Account</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 20px;">PRODUCT/SERVICE</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 20px;">CATEGORY</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 20px;">TYPE OF EXPENSE</th><th class="sorting_disabled" rowspan="1" colspan="1">PAYMENT TERM</th></tr>
+                        </thead>
+                        <tfoot>
+                        <tr><th rowspan="1" colspan="1">CORPORATION</th><th rowspan="1" colspan="1">ANT COUNTRY</th><th rowspan="1" colspan="1">SUPPLIERS IDs</th><th rowspan="1" colspan="1">ERP GL Account</th><th rowspan="1" colspan="1">PRODUCT/SERVICE</th><th rowspan="1" colspan="1">CATEGORY</th><th rowspan="1" colspan="1">TYPE OF EXPENSE</th><th rowspan="1" colspan="1">PAYMENT TERM</th></tr>
+                        </tfoot>
+            <tbody><tr role="row" class="odd"><td><input type="text" name="profDTinpCORP123csd" id="profDTinpCORP123csd" class="profDTinpCORP" value="TET" size="10" onchange="savePROFdt(&quot;123csd&quot;);"></td><td><select id="profDTselCOUNTRY123csd" class="profDTselCOUNTRY" onchange="savePROFdt(&quot;123csd&quot;);"><option value=""></option><option value="FI">FI</option><option value="EE" selected="">EE</option><option value="LV">LV</option><option value="LT">LT</option><option value="RU">RU</option></select></td><td><input type="text" name="profDTinpSUP123csd" id="profDTinpSUP123csd" class="profDTinpSUP" value="1032" size="10" onchange="savePROFdt(&quot;123csd&quot;);"></td><td>GL ACC</td><td>Network</td><td>Subcontracting</td><td>OPEX</td><td>30 days</td></tr><tr role="row" class="even"><td><input type="text" name="profDTinpCORP14csd" id="profDTinpCORP14csd" class="profDTinpCORP" value="TET" size="10" onchange="savePROFdt(&quot;14csd&quot;);"></td><td><select id="profDTselCOUNTRY14csd" class="profDTselCOUNTRY" onchange="savePROFdt(&quot;14csd&quot;);"><option value=""></option><option value="FI">FI</option><option value="EE">EE</option><option value="LV" selected="">LV</option><option value="LT">LT</option><option value="RU">RU</option></select></td><td><input type="text" name="profDTinpSUP14csd" id="profDTinpSUP14csd" class="profDTinpSUP" value="1032" size="10" onchange="savePROFdt(&quot;14csd&quot;);"></td><td>GL ACC</td><td>Cloud</td><td>Subcontracting</td><td>OPEX</td><td>30 days</td></tr><tr role="row" class="odd"><td><input type="text" name="profDTinpCORP125csd" id="profDTinpCORP125csd" class="profDTinpCORP" value="BAGUA" size="10" onchange="savePROFdt(&quot;125csd&quot;);"></td><td><select id="profDTselCOUNTRY125csd" class="profDTselCOUNTRY" onchange="savePROFdt(&quot;125csd&quot;);"><option value=""></option><option value="FI">FI</option><option value="EE">EE</option><option value="LV" selected="">LV</option><option value="LT">LT</option><option value="RU">RU</option></select></td><td><input type="text" name="profDTinpSUP125csd" id="profDTinpSUP125csd" class="profDTinpSUP" value="2237" size="10" onchange="savePROFdt(&quot;125csd&quot;);"></td><td>GL ACC</td><td>Consulting</td><td>Subcontracting</td><td>OPEX</td><td>30 days</td></tr><tr role="row" class="even"><td><input type="text" name="profDTinpCORP1232sd" id="profDTinpCORP1232sd" class="profDTinpCORP" value="BAGUA" size="10" onchange="savePROFdt(&quot;1232sd&quot;);"></td><td><select id="profDTselCOUNTRY1232sd" class="profDTselCOUNTRY" onchange="savePROFdt(&quot;1232sd&quot;);"><option value=""></option><option value="FI">FI</option><option value="EE">EE</option><option value="LV">LV</option><option value="LT" selected="">LT</option><option value="RU">RU</option></select></td><td><input type="text" name="profDTinpSUP1232sd" id="profDTinpSUP1232sd" class="profDTinpSUP" value="2237" size="10" onchange="savePROFdt(&quot;1232sd&quot;);"></td><td>GL ACC</td><td>Quotation system</td><td>Acquisitions</td><td>CAPEX</td><td>30 days</td></tr><tr role="row" class="odd"><td><input type="text" name="profDTinpCORP1875csd" id="profDTinpCORP1875csd" class="profDTinpCORP" value="CONSAFE" size="10" onchange="savePROFdt(&quot;1875csd&quot;);"></td><td><select id="profDTselCOUNTRY1875csd" class="profDTselCOUNTRY" onchange="savePROFdt(&quot;1875csd&quot;);"><option value=""></option><option value="FI">FI</option><option value="EE">EE</option><option value="LV" selected="">LV</option><option value="LT">LT</option><option value="RU">RU</option></select></td><td><input type="text" name="profDTinpSUP1875csd" id="profDTinpSUP1875csd" class="profDTinpSUP" value="2361" size="10" onchange="savePROFdt(&quot;1875csd&quot;);"></td><td>GL ACC</td><td>maintenance</td><td>maintenance</td><td>OPEX</td><td>30 days</td></tr><tr role="row" class="even"><td><input type="text" name="profDTinpCORP124532sd" id="profDTinpCORP124532sd" class="profDTinpCORP" value="CONSAFE" size="10" onchange="savePROFdt(&quot;124532sd&quot;);"></td><td><select id="profDTselCOUNTRY124532sd" class="profDTselCOUNTRY" onchange="savePROFdt(&quot;124532sd&quot;);"><option value=""></option><option value="FI">FI</option><option value="EE">EE</option><option value="LV" selected="">LV</option><option value="LT">LT</option><option value="RU">RU</option></select></td><td><input type="text" name="profDTinpSUP124532sd" id="profDTinpSUP124532sd" class="profDTinpSUP" value="2361" size="10" onchange="savePROFdt(&quot;124532sd&quot;);"></td><td>GL ACC</td><td>Astro upgrade</td><td>Acquisitions</td><td>CAPEX</td><td>30 days</td></tr></tbody></table>
+
+    </td><td valign="top">
+
+
+
+</td></tr></tbody></table>
+
+
+
+
+
+
+
+<script>
+var username = 'alex';
+var SuppliersList = {};
+var CorporationList = {};
+var ProdList = {};
+
+var ProfilesDT;
+
+
+//Get Unique values in 2d array
+function getUniqueValues(array, key) {
+    var result = new Set();
+    array.forEach(function(item) {
+        if (item.hasOwnProperty(key)) {
+            result.add(item[key]);
+        }
+    });
+    return result;
+}
+
+$(document).ready(function() {
+
+    FncFillInFinYears();
+
+
+    GetSuppliers();  //get all suppliers and save it in variable
+    GetCorporations(); //get all corporation and save it in variable
+    BindProfilesTable();
+
+
+    
+
+});
+
+
+
+function LoadProfilesDT() {
+
+    PopulateProfilesTable();
+}
+
+
+function FncFillInInputCorporation(Obj) {
+    // console.log($("#Country").val());
+    //console.log(Obj);
+        var Corporations = [];
+        for (var i in CorporationList) {
+                Corporations.push(CorporationList[i]["CORPORATION"] );
+        };
+        //enable autocomplete with values
+        autocomplete(Obj, Corporations);
+
+}
+
+function FncFillInInputSuppliers(Country, Obj) {
+    if(Country!==""){
+        var CountrySuppliers = [];
+
+        for (var i in SuppliersList[Country]) {
+            CountrySuppliers.push(SuppliersList[Country][i])
+        };
+        //enable autocomplete with values
+        autocomplete(Obj, CountrySuppliers);
+    };
+
+}
+
+
+function GetCorporations(){
+$.ajax({
+              type: "POST",
+              url: "getDataV2_1.php",
+              dataType: "json",
+              data: { 
+                    QRY:"CORPORATIONS1"
+                  }, 
+              success: function (response) { 
+                CorporationList=response;
+              },
+              error: function (response) {
+                  alert('error');
+              }
+          });
+          
+
+}
+
+function GetSuppliers(){
+$.ajax({
+              type: "POST",
+              url: "getDataV2_1.php",
+              dataType: "json",
+              data: { 
+                    QRY:"SUPPLIST2"
+                  }, 
+              success: function (response) {      
+                //get array of unique countries
+                var uniqueArr = getUniqueValues(response,'COUNTRY')
+                uniqueArr.forEach(CreateSubObject);
+                //for each country creates subobject in object SuppliersList
+                function CreateSubObject(value, index, array) {
+                    SuppliersList[value] = {}; 
+                }           
+                //FillIn Object     
+                for (var i in response) {
+                    SuppliersList[response[i]["COUNTRY"]][i]= response[i]["PL01001"]+' '+response[i]["PL01002"];
+                }     
+                //console.log(SuppliersList);
+              },
+              error: function (response) {
+                  alert('error');
+              }
+          });
+
+}
+
+
+function FncFillInFinYears() {
+  $("#FinYear").empty();
+  //clean the table
+  //$("#myTBLCUST > tbody").html("");
+  $.ajax({
+                type: "POST",
+                url: "getDataV2_1.php",
+                dataType: "json",
+                data: { 
+                  QRY:"FINYEARLIST1" }, 
+                success: function (result) {
+                    for (var i in result) {
+                        $('#FinYear').append('<option value="' + result[i]["FY"] +'" ' + result[i]["Def"]+'>' + result[i]["FY"] +'</option>');
+                    }
+                },
+                error: function (response) {
+                    alert('error');
+                }
+            });
+}
+
+
+function FncFillInCountry(Obj,DefVal) {
+  $(Obj).empty();
+  //clean the table
+  //$("#myTBLCUST > tbody").html("");
+  $.ajax({
+                type: "POST",
+                url: "getDataV2_1.php",
+                dataType: "json",
+                data: { 
+                  QRY:"COUNTRYLIST1" }, 
+                success: function (result) {
+                    //alert(DefVal);
+                    for (var i in result) {
+                        $(Obj).append('<option value="' + result[i]["COUNTRY"] +'" '+(result[i]["COUNTRY"] == DefVal ? 'selected' : '')+' ' +'>' + result[i]["COUNTRY"] +'</option>');
+                    }
+                },
+                error: function (response) {
+                    alert('error');
+                }
+            });
+}
+
+
+ 
+
+function BindProfilesTable() {
+    ProfilesDT = $("#ProfilesTable").DataTable({
+        "deferRender": true,
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "sDom": '',
+        "columnDefs": [
+            { "width": "50px", "targets": 0 },
+            { "width": "50px", "targets": 1 },
+            { "width": "20px", "targets": 2 },
+            { "width": "20px", "targets": 3 },
+            { "width": "20px", "targets": 4 },
+            { "width": "20px", "targets": 5 },
+            { "width": "20px", "targets": 6 },
+
+            ]
+    });
+}  
+
+function PopulateProfilesTable() {
+
+    ProfilesDT.clear();
+    $.ajax({
+        type: "POST",
+        url: "getDataV2_1.php",
+        dataType: "json",
+        data: { QRY:"GETPROFILES", UN:username, YEAR:$('#FinYear').val() },         
+        success: function (response) {
+            //var lastRowKey;
+            var jsonObject = JSON.parse(JSON.stringify(response));
+            
+            var result = jsonObject.map(function (item) {
+                result = [];
+                if (item.ID.substring(0,7) !== "No data") {
+                    result.push("<input type='text' name='profDTinpCORP"+item.ID+"' id='profDTinpCORP"+item.ID+"' class='profDTinpCORP' value='"+item.CORPORATION+"' size='10' onchange='savePROFdt(\""+item.ID+"\");' >");
+
+                    result.push("<select id='profDTselCOUNTRY"+item.ID+"' class='profDTselCOUNTRY' onchange='savePROFdt(\""+item.ID+"\");'></select>");
+                    FncFillInCountry("#profDTselCOUNTRY"+item.ID, item.COUNTRY);
+
+                    result.push("<input type='text' name='profDTinpSUP"+item.ID+"' id='profDTinpSUP"+item.ID+"' class='profDTinpSUP' value='"+item.SUPPLIER+"' size='10' onchange='savePROFdt(\""+item.ID+"\");' >");
+                    result.push(item.GLACC);
+                    result.push(item.PROD);
+                    result.push(item.CATEGORY);
+                    result.push(item.EXPTYPE);
+                    result.push("30 days");
+                
+
+                    //result.push(" <select id='sel"+item.ROWKEY+"' onchange='saveWBD();' class='areaSEL'></select>");
+                    //set selection boxed and set def values 
+                    //GetAllAreas('sel'+item.ROWKEY,item.AREA);
+                    // result.push("<div class='autocomplete' ><input type='text' name='WBDin"+item.ROWKEY+"' id='WBDin"+item.ROWKEY+"' value='"+item.PROJ+"' size='70' onchange='saveWBD();' class='projINP'></div>");   
+                    // result.push("<input type='text' name='WBDinPER"+item.ROWKEY+"' id='WBDinPER"+item.ROWKEY+"' class='percentCLS' value='0' size='3' onchange='calculateHoursSum();saveWBD();'  >");
+                    // result.push("<input type='text' name='WBDinHR"+item.ROWKEY+"' id='WBDinHR"+item.ROWKEY+"' class='hoursCLS' value='"+item.HOURS+"' size='3' onchange='saveWBD();' >");
+                    // result.push("<input type='image' name='WBDimg"+item.ROWKEY+"' id='WBDimg"+item.ROWKEY+"' class='removeCLS' src='images/remove.png'  width='20' height='20' onclick='RemoveRow($(this));'> ");
+                }
+                return result;
+            });
+            //check record existance in array
+            if(result[0].length>0) ProfilesDT.rows.add(result);
+        
+            ProfilesDT.draw();
+
+            /*initiate the autocomplete function on the current element, and pass along the project array as possible autocomplete values:*/            
+            // $(".projINP").each(function () {  
+            //   autocomplete(document.getElementById(this.id), LastProjects);   
+            // });
+
+        },
+        failure: function () {
+            $("#ProfilesTable").append(" Error when fetching data please contact administrator");
+        }
+    });
+}
+
+
+
+function savePROFdt(id) {
+
+console.log("should be saved "+id);
+}
+
+
+</script>
+</body></html>
