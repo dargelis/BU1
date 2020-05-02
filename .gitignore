@@ -488,3 +488,4 @@ scripts/_Welcome_files/dataTables.buttons.min.js
 scripts/_Welcome_files/jquery-3.4.1.min.js
 scripts/_Welcome_files/jquery.dataTables.min.css
 scripts/_Welcome_files/jquery.dataTables.min.js
+config/access.php

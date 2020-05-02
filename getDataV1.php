@@ -1,7 +1,10 @@
 <?php
 
 require_once "config\access.php";
-
+// define('DB_SERVER', '10.#################');
+// define('DB_USERNAME', '.#################');');
+// define('DB_PASSWORD', '.#################');');
+// define('DB_NAME', '.#################');');
 
 //$serverName = "10.196.68.11"; 
 $connectionInfo = array( "Database"=>DB_NAME, "UID"=>DB_USERNAME, "PWD"=>DB_PASSWORD,"CharacterSet"=>"UTF-8");

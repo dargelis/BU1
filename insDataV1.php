@@ -1,6 +1,10 @@
 <?php
 
 require_once "config\access.php";
+// define('DB_SERVER', '10.#################');
+// define('DB_USERNAME', '.#################');');
+// define('DB_PASSWORD', '.#################');');
+// define('DB_NAME', '.#################');');
 
 $connectionInfo = array( "Database"=>DB_NAME, "UID"=>DB_USERNAME, "PWD"=>DB_PASSWORD,"CharacterSet"=>"UTF-8");
 $conn = sqlsrv_connect( DB_SERVER, $connectionInfo);
