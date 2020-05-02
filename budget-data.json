@@ -13,17 +13,17 @@
               {
                 "name": "A.F 1",
                 "rate": 0.02,
-                "value": 1
+                "value": 11
               },
               {
                 "name": "A.F 2",
                 "rate": -2.92,
-                "value": 2
+                "value": 22
               },
               {
                 "name": "A.F 3",
                 "rate": -0.07,
-                "value": 3433
+                "value": 33
               }
             ]
           },
