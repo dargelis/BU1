@@ -1,9 +1,7 @@
 <?php
 
-define('DB_SERVER', '10.196.68.11');
-define('DB_USERNAME', 'AlexSys');
-define('DB_PASSWORD', 'crystal');
-define('DB_NAME', 'AlexSys');
+require_once "config\access.php";
+
 
 
 $connectionInfo = array( "Database"=>DB_NAME, "UID"=>DB_USERNAME, "PWD"=>DB_PASSWORD,"CharacterSet"=>"UTF-8");
