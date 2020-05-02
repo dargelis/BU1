@@ -335,7 +335,6 @@ include ('footerV1.php');
 
 ?>
 
-
 <script>
 
 var username = '<?php echo $_SESSION["username"]; ?>';
@@ -344,69 +343,9 @@ var ReportData = [];
 var DetailsReportDT;
 var TrMappingDT;
 
-
 ///--------------------------------------------------------------------------------------------------------------
-///---------------------TABLE BINDING----------------------------------------------------------------------------------------
+///--------------------Transactions Mapping---------------------------------------------------------------------------------------
 ///--------------------------------------------------------------------------------------------------------------
-
-function BindReportTable() {
-  
-    ReportDT = $("#ReportTable").DataTable({
-        "deferRender": true,
-        "paging": false,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": false,
-        "info": false,
-        "autoWidth": false,
-        "sDom": '',
-        "pageLength": 50,
-        "createdRow": function( row, data, dataIndex){
-                        $(row).attr('id', dataIndex);
-
-                        if (data[1] !=="-" && data[2] =="-" ){ 
-                          $(row).css('background-color', '#c7e4ff');
-                          $(row).addClass('TotalRow2');
-                        } 
-                        if (data[1] == "-"  ) {
-                          $(row).css('background-color', '#8fc8ff');
-                          $(row).css('font-weight', 'bold');
-                          $(row).addClass('TotalRow1');
-                        } 
-                        if (data[1] !=="-" && data[2] !=="-" ) {
-                            $(row).css('background-color', 'white');
-                            $(row).addClass('DetailedRow');
-                        }
-                    },
-        "columnDefs": [
-                // { targets: 0, visible: false },
-                // { targets: '_all', orderable: true },
-                // { targets: 10, orderable: true },
-                // { targets: 16,  className: 'highlight_cell_total'},
-                    ],
-    });
-}  
-
-function BindDetailsReportTable() {
-    DetailsReportDT = $("#DetailsReportTable").DataTable({
-      "deferRender": true,
-    //   "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": false,
-    //   "autoWidth": false,
-    //   "sDom": 'flipt',
-    //   "pageLength": 15
-
-
-      "autoWidth": true,
-      "scrollY":        "40vh",
-      "scrollCollapse": true,
-      "paging":         false,
-
-  });
-}  
 
 function BindTrMappingTable() {
     TrMappingDT = $("#TrMappingDT").DataTable({
@@ -429,12 +368,6 @@ function BindTrMappingTable() {
 
   });
 }  
-
-
-///--------------------------------------------------------------------------------------------------------------
-///--------------------TABLE POPIULATION---------------------------------------------------------------------------------------
-///--------------------------------------------------------------------------------------------------------------
-
 
 function PopulateTrMappingDT(Country,FY, TrNum, TrRem) {
 
@@ -519,6 +452,30 @@ function saveTrMapping(ID){
                         alert('DB ins/upd error');
                     }
                 });
+}
+
+//show Transaction mapping dialog
+function showTRmapping(COUNTRY, TRNO, TRPARTNER, FY){
+    // console.log("open modal for tr mapping");
+    console.log(COUNTRY);
+    console.log(FY);
+    console.log(TRNO);
+    console.log(TRPARTNER);
+
+    $('#CurrentTrCountry').html(COUNTRY);
+    $('#CurrentTrFY').html(FY);
+    $('#CurrentTrNum').html(TRNO);
+    $('#CurrentTrRem').html(TRPARTNER);
+
+    //JUST FOR TEST BUTTON
+    if ($('#CurrentTrCountry').html()==''){
+        COUNTRY='EE';
+        FY='2020';
+    }
+
+    PopulateTrMappingDT(COUNTRY,FY, TRNO, TRPARTNER) ;
+
+    $("#modelTRmapping").modal('show');
 }
 
 //REMOVE lines from TrMapping
@@ -617,8 +574,32 @@ function FncFillinProfilePopUp(RowID){
 }
 
 
-
+///--------------------------------------------------------------------------------------------------------------
+///--------------------TRANSACTIONS REPORT  after chart seletion---------------------------------------------------------------------------------------
+///--------------------------------------------------------------------------------------------------------------
 ///transactions list
+
+function BindDetailsReportTable() {
+    DetailsReportDT = $("#DetailsReportTable").DataTable({
+      "deferRender": true,
+    //   "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": false,
+    //   "autoWidth": false,
+    //   "sDom": 'flipt',
+    //   "pageLength": 15
+
+
+      "autoWidth": true,
+      "scrollY":        "40vh",
+      "scrollCollapse": true,
+      "paging":         false,
+
+  });
+}  
+
 function PopulateDetailsReportTable(BUname, Month, Dimen, DimenVal) {
     if (!Month) Month='';
     // console.log(BUname);
@@ -677,6 +658,50 @@ function PopulateDetailsReportTable(BUname, Month, Dimen, DimenVal) {
                 });
     }
 }
+
+
+
+///--------------------------------------------------------------------------------------------------------------
+///--------------------MAIN TABLE ---------------------------------------------------------------------------------------
+///--------------------------------------------------------------------------------------------------------------
+
+function BindReportTable() {
+  
+  ReportDT = $("#ReportTable").DataTable({
+      "deferRender": true,
+      "paging": false,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": false,
+      "info": false,
+      "autoWidth": false,
+      "sDom": '',
+      "pageLength": 50,
+      "createdRow": function( row, data, dataIndex){
+                      $(row).attr('id', dataIndex);
+
+                      if (data[1] !=="-" && data[2] =="-" ){ 
+                        $(row).css('background-color', '#c7e4ff');
+                        $(row).addClass('TotalRow2');
+                      } 
+                      if (data[1] == "-"  ) {
+                        $(row).css('background-color', '#8fc8ff');
+                        $(row).css('font-weight', 'bold');
+                        $(row).addClass('TotalRow1');
+                      } 
+                      if (data[1] !=="-" && data[2] !=="-" ) {
+                          $(row).css('background-color', 'white');
+                          $(row).addClass('DetailedRow');
+                      }
+                  },
+      "columnDefs": [
+              // { targets: 0, visible: false },
+              // { targets: '_all', orderable: true },
+              // { targets: 10, orderable: true },
+              // { targets: 16,  className: 'highlight_cell_total'},
+                  ],
+  });
+}  
 
 //////////main DT population
 function PopulateReportTable() {
@@ -1243,32 +1268,6 @@ function FncEditBU(Obj) {
 ///--------------------Different miscs - fillins--------------------------------------------------------------------------------------
 ///--------------------------------------------------------------------------------------------------------------
 
-//show Transaction mapping dialog
-function showTRmapping(COUNTRY, TRNO, TRPARTNER, FY){
-    // console.log("open modal for tr mapping");
-    console.log(COUNTRY);
-    console.log(FY);
-    console.log(TRNO);
-    console.log(TRPARTNER);
-
-    $('#CurrentTrCountry').html(COUNTRY);
-    $('#CurrentTrFY').html(FY);
-    $('#CurrentTrNum').html(TRNO);
-    $('#CurrentTrRem').html(TRPARTNER);
-
-    //JUST FOR TEST BUTTON
-    if ($('#CurrentTrCountry').html()==''){
-        COUNTRY='EE';
-        FY='2020';
-    }
-
-    PopulateTrMappingDT(COUNTRY,FY, TRNO, TRPARTNER) ;
-
-    $("#modelTRmapping").modal('show');
-}
-
-
-
 //Select possible BUs  - ActProfBU select
 function FncFillInsSELECTbu() {
 
@@ -1316,8 +1315,6 @@ $.ajax({
             }
         });
 }
-
-
 
 //FinYear select
 function FncFillInFinYears() {
