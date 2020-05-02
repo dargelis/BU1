@@ -307,18 +307,19 @@ include ('headerV1.php');
         <!-- Modal Header -->
         <div class="modal-header modelProfSelection_body">
           <h4 class="modal-title">Profile selection for transaction mapping</h4>
+          add highlight of fields in table where will be insert
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <!-- Modal body -->
         <div class="modal-body modelProfSelection_body" >
-            <div id="inpSelProf_focusID" style="display:block"></div>  
+            <div id="inpSelProf_focusID" style="display:none"></div>  
             
             <div class='autocomplete' >
                 <input type='text'  id='inpSelectProfile' value='' onChange='' size='100' placeholder='search profile'>
             </div>  
 
-            <!-- <div id="inpSelProf_Acc" style="display:block"></div>  
-            <div id="inpSelProf_SuppID" style="display:block"></div>   -->
+            <div id="inpSelProf_Acc" style="display:block"></div>  
+            <div id="inpSelProf_SuppID" style="display:block"></div>  
 
         </div>
         <!-- Modal footer -->
@@ -601,26 +602,17 @@ function FncFillinProfilePopUp(RowID){
 
                         var result = jsonObject.map(function (item) {
                             // console.log(item.CORP+' '+item.ACC+' '+item.SUPPLIER);
-                            return (item.COUNTRY+' '+item.FY+' '+item.CORP+' '+item.ACC+' '+item.SUPPLIER);
+                            return (item.COUNTRY+' '+item.FY+' '+item.CORP+' '+item.PROD+' '+item.ACC+' '+item.SUPPLIER);
                         })
-                        
-                        // autocomplete(
-                        //     document.getElementById('inpSelectProfile'),
-                        //     result
-                        //     );
 
-                        autocomplete_returnX(
+                        autocomplete_returnX2(
                             document.getElementById('inpSelectProfile'),
                             result,                           
                             'trMappingAccount'+RowID,
-                            'trMappingSUPPID'+RowID
+                            'trMappingSUPPID'+RowID,
+                            'modelProfSelection'
                         );
 
-                        
-                      
-                        // $("#modelProfSelection").modal('toggle');
-                        // $("#modelProfSelection").modal('toggle');
-                        // console.log('toggle');
                     },
                     error: function (response) {
                         alert('AJAX error');

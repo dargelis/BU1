@@ -590,8 +590,6 @@ $conn = sqlsrv_connect( DB_SERVER, $connectionInfo);
         $data[] = $sub_data;
     }
 }
-
-
   //---------------------------------------------------------------------------------------------------------
 
   elseif ($_POST['QRY']==='GET_PROFILES_FOR_TRMAPPING'){
