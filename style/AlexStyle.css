@@ -150,6 +150,7 @@ body{
 
 .highlight_selected_cell{
   background-color:orange !important;
+  transition: background 3s ease-in-out;
 }
 .highlight_selected_cell input[type=number]{
   background-color: orange !important;

@@ -260,16 +260,17 @@ function autocomplete(inp, arr) {
         closeAllLists(e.target);
     });
   }
-  
-
-
-
  
   /////////////////////////////////////////////////////////
   ///return two value in two fields, if value separated by SPACE
   //show list in the InPUT, and return result in  two DIVs
 
   function autocomplete_returnX2(inp, arr, IDOfFirstOut, IDOfSecondOut,NameOfModalForClose) {
+
+    // cells ffor Account and supp_id hightligth;
+    $("#"+IDOfFirstOut).addClass("highlight_selected_cell");
+    $("#"+IDOfSecondOut).addClass("highlight_selected_cell");
+
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;
@@ -331,6 +332,9 @@ function autocomplete(inp, arr) {
 
                 //reset initial input
                 document.getElementById(inp.id).value="";
+                // cells for Account and supp_id REMOVE hightligth;
+                $("#"+IDOfFirstOut).removeClass("highlight_selected_cell");
+                $("#"+IDOfSecondOut).removeClass("highlight_selected_cell");                
                 // close modal
                 $('#'+NameOfModalForClose).modal('hide');
 

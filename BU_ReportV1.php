@@ -252,7 +252,7 @@ include ('headerV1.php');
 
 <!-- The Modal -- mapping GL transaction -->
 <div class="modal fade" id="modelTRmapping">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
@@ -261,8 +261,6 @@ include ('headerV1.php');
         </div>
         <!-- Modal body -->
         <div class="modal-body" >
-        By transaction number or transaction remark/partner replace Account and Partner ID<br>
-        Should be hot key in supp and account, which make popup with one field to PROFILES!! and autocomplite
         
         <div id="CurrentTrCountry" style="display:none"></div>  
         <div id="CurrentTrFY" style="display:none"></div>  
@@ -279,8 +277,8 @@ include ('headerV1.php');
                             <th >FinYear</th>
                             <th >Transaction Number</th>
                             <th >Partner/Remark</th>
-                            <th >Account</th>
-                            <th >SupplierID</th>
+                            <th >Account (F2)</th>
+                            <th >SupplierID (F2)</th>
                             <th >
                             <input type='image' class='' src='images/add.png'  width='30' height='30' onclick='NewRowToTrMapping();'> 
                             </th>                    
@@ -302,12 +300,11 @@ include ('headerV1.php');
 
 <!-- The Modal -- selection of profile for transaction mapping -->
 <div class="modal fade" id="modelProfSelection">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog  modal-lg">
       <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header modelProfSelection_body">
           <h4 class="modal-title">Profile selection for transaction mapping</h4>
-          add highlight of fields in table where will be insert
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <!-- Modal body -->
@@ -584,8 +581,6 @@ function RunTrConversion(){
 }
 //Create autocomplite for profile selection in TrMapping POPUP
 function FncFillinProfilePopUp(RowID){
-
-    // document.getElementById('inpSelProf_focusID').innerHTML='test';
 
     $.ajax({
                     type: "POST",
