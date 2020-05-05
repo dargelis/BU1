@@ -297,7 +297,6 @@ include ('headerV1.php');
     </div>
 </div>
 
-
 <!-- The Modal -- selection of profile for transaction mapping -->
 <div class="modal fade" id="modelProfSelection">
     <div class="modal-dialog  modal-lg">
@@ -310,14 +309,11 @@ include ('headerV1.php');
         <!-- Modal body -->
         <div class="modal-body modelProfSelection_body" >
             <div id="inpSelProf_focusID" style="display:none"></div>  
-            
             <div class='autocomplete' >
                 <input type='text'  id='inpSelectProfile' value='' onChange='' size='80' placeholder='search profile'>
             </div>  
-
             <div id="inpSelProf_Acc" style="display:block"></div>  
             <div id="inpSelProf_SuppID" style="display:block"></div>  
-
         </div>
         <!-- Modal footer -->
         <div class="modal-footer modelProfSelection_body">
@@ -326,7 +322,6 @@ include ('headerV1.php');
       </div>
     </div>
 </div>
-
 
 
 <?php

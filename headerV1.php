@@ -53,7 +53,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/scroller/2.0.1/css/scroller.dataTables.min.css" >    
 
     <!-- D3 -->
-    <script src = "https://d3js.org/d3.v4.min.js"></script>
+    <!-- <script src = "https://d3js.org/d3.v4.min.js"></script> -->
+    <script type="text/javascript" src="scripts/d3.v4.min.js"></script>
 
     <!-- Selectpicker -->
     <link rel="stylesheet" href="selectpicker/picker.min.css">

@@ -10,11 +10,95 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 include ('headerV1.php');
    
 ?>
+
+<script type="text/javascript" src="scripts/d3.v4.min.js"></script>
+<script type="text/javascript" src="scripts/d3.v2.js"></script>
+<script type="text/javascript" src="scripts/gauge.js"></script>
+<input type="button" value="start gauge chart" onClick="initialize()">
+
+
+    <span id="memoryGaugeContainer"></span>
+		<span id="cpuGaugeContainer"></span>
+		<span id="networkGaugeContainer"></span>
+		<span id="testGaugeContainer"></span>
+
+
+
+
+
+
+
   <video id="video" width="720" height="560" autoplay muted> </video>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- <script type="text/javascript" src="scripts/face-api.min.js"></script> -->
     <script type='text/javascript'>
+
+
+
+
+      /////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////
+			
+				
+var gauges = [];
+			
+			function createGauge(name, label, min, max)
+			{
+				var config = 
+				{
+					size: 240,
+					label: label,
+					min: undefined != min ? min : 0,
+					max: undefined != max ? max : 100,
+					minorTicks: 5
+				}
+				
+        var range = config.max - config.min;
+        
+        config.greenZones = [{ from: config.min, to: config.min + range*0.65 }];
+				config.yellowZones = [{ from: config.min + range*0.65, to: config.min + range*0.9 }];
+				config.redZones = [{ from: config.min + range*0.9, to: config.max }];
+				
+				gauges[name] = new Gauge(name + "GaugeContainer", config);
+				gauges[name].render();
+			}
+			
+			function createGauges()
+			{
+				createGauge("memory", "TO");
+				createGauge("cpu", "GP");
+				createGauge("network", "COSTS");
+			}
+			
+			function updateGauges()
+			{
+				for (var key in gauges)
+				{
+					var value = getRandomValue(gauges[key])
+					gauges[key].redraw(value);
+				}
+			}
+			
+			function getRandomValue(gauge)
+			{
+				var overflow = 0; //10;
+				return gauge.config.min - overflow + (gauge.config.max - gauge.config.min + overflow*2) *  Math.random();
+			}
+			
+			function initialize()
+			{
+				createGauges();
+				setInterval(updateGauges, 500);
+      }
+      
+
+      /////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////
+
+
+
+
 
  
 
