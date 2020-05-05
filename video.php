@@ -11,9 +11,9 @@ include ('headerV1.php');
    
 ?>
 
-<script type="text/javascript" src="scripts/d3.v4.min.js"></script>
+<!-- <script type="text/javascript" src="scripts/d3.v4.min.js"></script>
 <script type="text/javascript" src="scripts/d3.v2.js"></script>
-<script type="text/javascript" src="scripts/gauge.js"></script>
+<script type="text/javascript" src="scripts/gauge.js"></script> -->
 <input type="button" value="start gauge chart" onClick="initialize()">
 
 

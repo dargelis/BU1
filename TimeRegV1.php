@@ -87,9 +87,7 @@ include ('headerV1.php');
                     </tfoot>
           </table>
 
-          <span id="dailyGaugeContainer"></span>
-
-
+          <span id="dailyGaugeContainer" class="gaugechart"></span>
 
         </div>
         
@@ -253,6 +251,7 @@ function PopulateDaysTable() {
             });
             DaysTable.rows.add(result);
             DaysTable.draw();
+
         },
          
         failure: function () {
@@ -323,6 +322,10 @@ function PopulateWBDTable(UN, DT) {
               autocomplete(document.getElementById(this.id), LastProjects);   
             });
 
+            //FIRST TIME create and get data for gauge chart
+            createGauges();
+            updateGauges(username,$("#WBDDate").html());
+
         },
         failure: function () {
             $("#WBDTable").append(" Error when fetching data please contact administrator");
@@ -374,6 +377,9 @@ function saveWBD(){
                   , 
                 success: function (response) {
                   console.log(response);
+                  //AFTER RECORDING TO DB create and get data for gauge chart
+                  createGauges();
+                  updateGauges(username,$("#WBDDate").html());
                 },
                 error: function (response) {
                   alert('DB ins/upd error');
@@ -618,12 +624,6 @@ function getDataForGraph() {
                 UN: username }, 
               success: function (response) {
                 drawGraph(response);
-                console.log(d3.version);
-                console.log(d3v2.version);
-
-                createGauges();
-                // setInterval(updateGauges, 500);                
-                // return result;
 
               },
               error: function (response) {
@@ -846,25 +846,23 @@ var svg = d3.select("svg")
 /////////////////////////////////////////////////////
 ///////GAUGE CHART//////////////////////////////////////////////
 			
-				
       var gauges = [];
-			
+			var i=0;
 			function createGauge(name, label, min, max)
 			{
 				var config = 
 				{
-					size: 120,
+					size: 180,
 					label: label,
 					min: undefined != min ? min : 0,
-					max: undefined != max ? max : 100,
+					max: undefined != max ? max : 150,
 					minorTicks: 5
 				}
-				
         var range = config.max - config.min;
         
-        config.greenZones = [{ from: config.min, to: config.min + range*0.65 }];
-				config.yellowZones = [{ from: config.min + range*0.65, to: config.min + range*0.9 }];
-				config.redZones = [{ from: config.min + range*0.9, to: config.max }];
+        config.greenZones = [{ from: config.min, to: config.min + range*0.55 }];
+				config.yellowZones = [{ from: config.min + range*0.55, to: config.min + range*0.66 }];
+				config.redZones = [{ from: config.min + range*0.66, to: config.max }];
 				
 				gauges[name] = new Gauge(name + "GaugeContainer", config);
 				gauges[name].render();
@@ -872,32 +870,41 @@ var svg = d3.select("svg")
 			
 			function createGauges()
 			{
+        d3v2.selectAll(".gaugechart > *").remove(); //clear all graphics
 				createGauge("daily", "Daily target");
 			}
 			
-			function updateGauges()
+			function updateGauges(UN, DT)
 			{
-				for (var key in gauges)
-				{
-					var value = getRandomValue(gauges[key])
-					gauges[key].redraw(value);
-				}
+        $.ajax({
+                type: "POST",
+                url: "getDataV1.php",
+                dataType: "json",
+                data: { 
+                  QRY:"GET_UN_TIME_BY_DT",
+                  UNAME:UN,
+                  DATUMS:DT
+                }, 
+                success: function (result) {
+                    // console.log(result[0]["HRS"]);
+                    for (var key in gauges)
+                    {
+                      var value = getRandomValue(gauges[key],result[0]["HRS"])
+                      gauges[key].redraw(value);
+                    }
+                },
+                error: function (response) {
+                    alert('error');
+                }
+            });
 			}
 			
-			function getRandomValue(gauge)
+			function getRandomValue(gauge,x)
 			{
 				var overflow = 0; //10;
-				return gauge.config.min - overflow + (gauge.config.max - gauge.config.min + overflow*2) *  Math.random();
+        return gauge.config.min - overflow + (gauge.config.max - gauge.config.min + overflow*2) *  (x*100/gauge.config.max);
 			}
 			
-			function initialize()
-			{
-				createGauges();
-				setInterval(updateGauges, 500);
-      }                         
-
-
-
 </script>
 
 

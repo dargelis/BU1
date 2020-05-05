@@ -56,13 +56,12 @@
     <!-- <script src = "https://d3js.org/d3.v4.min.js"></script> -->
 
 
-    <script type="text/javascript" src="scripts/d3.v2.js"></script>
+    <script type="text/javascript" src="scripts/d3.v2.min.js"></script>
     <script>
         var d3v2 = window.d3;
         window.d3 = null;
     </script>   
     <script type="text/javascript" src="scripts/gauge.js"></script>
-
     <script type="text/javascript" src="scripts/d3.v4.min.js"></script>
 
  

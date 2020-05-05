@@ -391,6 +391,32 @@ $conn = sqlsrv_connect( DB_SERVER, $connectionInfo);
         $data[] = $sub_data;
     }
 }  
+
+    //---------------------------------------------------------------------------------------------------------
+
+    ELSEIF ($_POST['QRY']==='GET_UN_TIME_BY_DT'){
+        $sql="
+            SELECT isnull(sum(HOURS),0)/8 as HRS 
+            FROM TIMEREG_WBD
+            where USERNAME='".$_POST['UNAME']."' and DT='".$_POST['DATUMS']."'
+        ";
+        $cnt=0;
+        //echo $sql;
+        $stmt = sqlsrv_query( $conn, $sql);
+        if( $stmt === false ) {die( print_r( sqlsrv_errors(), true));}
+        while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+            $sub_data["HRS"]=$row['HRS'];
+            $data[] = $sub_data;   
+            $cnt+=1;
+        }
+
+        //if no records
+        if ($cnt===0) {
+            $sub_data["HRS"]="No data";
+            $data[] = $sub_data;
+        }
+    }
+
    //---------------------------------------------------------------------------------------------------------
 
 
