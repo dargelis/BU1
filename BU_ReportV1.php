@@ -312,7 +312,7 @@ include ('headerV1.php');
             <div id="inpSelProf_focusID" style="display:none"></div>  
             
             <div class='autocomplete' >
-                <input type='text'  id='inpSelectProfile' value='' onChange='' size='100' placeholder='search profile'>
+                <input type='text'  id='inpSelectProfile' value='' onChange='' size='80' placeholder='search profile'>
             </div>  
 
             <div id="inpSelProf_Acc" style="display:block"></div>  
