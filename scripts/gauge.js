@@ -30,7 +30,7 @@ function Gauge(placeholderName, configuration)
 
 	this.render = function()
 	{
-		this.body = d3.select("#" + this.placeholderName)
+		this.body = d3v2.select("#" + this.placeholderName)
 							.append("svg:svg")
 							.attr("class", "gauge")
 							.attr("width", this.config.size)
@@ -133,7 +133,7 @@ function Gauge(placeholderName, configuration)
 		
 		var pointerPath = this.buildPointerPath(midValue);
 		
-		var pointerLine = d3.svg.line()
+		var pointerLine = d3v2.svg.line()
 									.x(function(d) { return d.x })
 									.y(function(d) { return d.y })
 									.interpolate("basis");
@@ -201,7 +201,7 @@ function Gauge(placeholderName, configuration)
 		
 		this.body.append("svg:path")
 					.style("fill", color)
-					.attr("d", d3.svg.arc()
+					.attr("d", d3v2.svg.arc()
 						.startAngle(this.valueToRadians(start))
 						.endAngle(this.valueToRadians(end))
 						.innerRadius(0.65 * this.config.raduis)

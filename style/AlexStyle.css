@@ -262,18 +262,35 @@ animation: spin 1s linear infinite;
 }
 
 .ProfilesTable thead th {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
-    border: 2px solid grey;
-    font: 10px sans-serif; 
-    padding: 0.5px;
-    text-align: center;
-    color: darkblue;
+  font-size: 12px; 
+  
+  font-family: Calibri, Helvetica, sans-serif;  
+  margin: 0px; 
+  padding: 0px;   
+  text-align: center;
+  color: darkblue; 
+  background-color:#6b96bf;
     
   }
 .ProfilesTable tbody tr td {
-    border: 2px solid grey;
+    /* border: 2px solid grey;
+    text-align: left; */
+
+    border: 1px solid grey;
     text-align: left;
+    margin: 0px; 
+    padding: 0px;   
+    font-size: 14px; 
+    font-family: Calibri, Helvetica, sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    border-spacing: 0px;
   }
+  .ProfilesTable input[type=text] {
+    width: 100%;
+    /* background-color: #f0fff0; */
+  }
+
 /* 
 .ProfilesTable tbody tr:nth-child(odd) {
     background-color: green;

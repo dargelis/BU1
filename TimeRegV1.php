@@ -11,6 +11,7 @@ include ('headerV1.php');
    
 ?>
 
+
 <table border=0 cellpadding="10">
 
 <tr>
@@ -85,6 +86,11 @@ include ('headerV1.php');
                       </tr>
                     </tfoot>
           </table>
+
+          <span id="dailyGaugeContainer"></span>
+
+
+
         </div>
         
         <!-- Modal footer -->
@@ -600,13 +606,7 @@ $(document).ready(function() {
       getDataForGraph();
     })
 
-
-      
-
-
 });
-
-
 
 function getDataForGraph() {
   $.ajax({
@@ -618,6 +618,11 @@ function getDataForGraph() {
                 UN: username }, 
               success: function (response) {
                 drawGraph(response);
+                console.log(d3.version);
+                console.log(d3v2.version);
+
+                createGauges();
+                // setInterval(updateGauges, 500);                
                 // return result;
 
               },
@@ -838,7 +843,58 @@ var svg = d3.select("svg")
 
  
 
-                         
+/////////////////////////////////////////////////////
+///////GAUGE CHART//////////////////////////////////////////////
+			
+				
+      var gauges = [];
+			
+			function createGauge(name, label, min, max)
+			{
+				var config = 
+				{
+					size: 120,
+					label: label,
+					min: undefined != min ? min : 0,
+					max: undefined != max ? max : 100,
+					minorTicks: 5
+				}
+				
+        var range = config.max - config.min;
+        
+        config.greenZones = [{ from: config.min, to: config.min + range*0.65 }];
+				config.yellowZones = [{ from: config.min + range*0.65, to: config.min + range*0.9 }];
+				config.redZones = [{ from: config.min + range*0.9, to: config.max }];
+				
+				gauges[name] = new Gauge(name + "GaugeContainer", config);
+				gauges[name].render();
+			}
+			
+			function createGauges()
+			{
+				createGauge("daily", "Daily target");
+			}
+			
+			function updateGauges()
+			{
+				for (var key in gauges)
+				{
+					var value = getRandomValue(gauges[key])
+					gauges[key].redraw(value);
+				}
+			}
+			
+			function getRandomValue(gauge)
+			{
+				var overflow = 0; //10;
+				return gauge.config.min - overflow + (gauge.config.max - gauge.config.min + overflow*2) *  Math.random();
+			}
+			
+			function initialize()
+			{
+				createGauges();
+				setInterval(updateGauges, 500);
+      }                         
 
 
 

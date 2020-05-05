@@ -30,9 +30,9 @@ include ('headerV1.php');
         </div>
 <tr>
     <td valign="top">
-        <table id="ProfilesTable" class="display compact ProfilesTable" style="display:none" >
-                        <thead >
-                            <tr >
+        <table id="ProfilesTable" class="table-bordered ProfilesTable" style="display:block" >
+                        <thead  >
+                        <tr >
                             <th >CORPORATION</th>
                             <th >ANTALIS COUNTRY</th>   
                             <th >SUPPLIERS IDs</th>  
@@ -41,25 +41,11 @@ include ('headerV1.php');
                             <th >CATEGORY</th>  
                             <th >TYPE OF EXPENSE</th>  
                             <th >PAYMENT TERM</th>  
-                            <th ><input type='image' class='' src='images/add.png'  width='30' height='30' onclick='EnterRowToProfilesTable();'> 
+                            <th ><input type='image' class='' src='images/add.png'  width='30' height='30' onclick='EnterRowToProfilesTable();' title='Create new profile'> 
                             </th>                 
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <th ></th>
-                            <th ></th>   
-                            <th ></th>  
-                            <th ></th> 
-                            <th ></th>  
-                            <th ></th>  
-                            <th ></th>  
-                            <th></th>   
-                            <th >
-                                <!-- <input type='image' class='' src='images/add.png'  width='40' height='40' onclick='EnterRowToProfilesTable();'>   -->
-                            </th>   
-                        </tr>
-                        </tfoot>
+                      
             </table>
                        
           
@@ -153,7 +139,7 @@ $(document).ready(function() {
     
     BindProfilesTable();
     BindMultiSuppTable();
-    $('[data-toggle="tooltip"]').tooltip(); 
+    // $('[data-toggle="tooltip"]').tooltip(); 
     
 
     $('#myModalMultiSupp').on('hidden.bs.modal', function () {
@@ -226,6 +212,7 @@ function FncFillInCountry(Obj,DefVal) {
                     for (var i in result) {
                         $(Obj).append('<option value="' + result[i]["COUNTRY"] +'" '+(result[i]["COUNTRY"] == DefVal ? 'selected' : '')+' ' +'>' + result[i]["COUNTRY"] +'</option>');
                     }
+
                 },
                 error: function (response) {
                     alert('error');
@@ -247,6 +234,8 @@ function FncFillInCategory(Obj,DefVal) {
                     for (var i in result) {
                         $(Obj).append('<option value="' + result[i]["ID"] +'" '+(result[i]["ID"] == DefVal ? 'selected' : '')+' ' +'>' + result[i]["CATEGORY"] +'</option>');
                     }
+                    //in order to allign header and columns
+                    ProfilesDT.columns.adjust(); 
                 },
                 error: function (response) {
                     alert('error');
@@ -258,25 +247,30 @@ function BindProfilesTable() {
     ProfilesDT = $("#ProfilesTable").DataTable({
         "deferRender": true,
         "paging": false,
-        "lengthChange": false,
+        // "lengthChange": false,
         "searching": false,
         "ordering": true,
         "info": false,
-        "autoWidth": false,
-        "sDom": '',
-        "pageLength": 50,
-
+        // "autoWidth": false,
+        // "sDom": '',
+        // "pageLength": 50,
+        "sScrollY":        "70vh",
+        "sScrollX": "100%", 
+        "scrollCollapse": true,
+        "autoWidth": true,
+        "lengthChange": true,
+ 
         'fnCreatedRow': function (nRow, aData, iDataIndex) {
             $(nRow).attr('id', iDataIndex);
         },
         "columnDefs": [
-            { "width": "50px", "targets": 0 },
-            { "width": "50px", "targets": 1 },
-            { "width": "20px", "targets": 2 },
-            { "width": "50px", "targets": 3 },
-            { "width": "20px", "targets": 4 },
-            { "width": "20px", "targets": 5 },
-            { "width": "20px", "targets": 6 },
+            // { "width": "50px", "targets": 0 },
+            // { "width": "50px", "targets": 1 },
+            // { "width": "20px", "targets": 2 },
+            // { "width": "50px", "targets": 3 },
+            // { "width": "20px", "targets": 4 },
+            // { "width": "20px", "targets": 5 },
+            // { "width": "20px", "targets": 6 },
             ]
     });
 }  
@@ -349,6 +343,7 @@ function PopulateMultiSuppTable() {
             });        
             //show table 
             $("#MultiSuppDT").show();
+
         },
         failure: function () {
             $("#MultiSuppDT").append(" Error when fetching data please contact administrator");
@@ -416,6 +411,9 @@ function PopulateProfilesTable() {
             $(".profDTinpACC").attr("autocomplete", "off");
             //show table 
             $("#ProfilesTable").show();
+
+            //in order to allign header and columns
+            ProfilesDT.columns.adjust(); 
         },
         failure: function () {
             $("#ProfilesTable").append(" Error when fetching data please contact administrator");
@@ -445,6 +443,7 @@ function EnterRowToProfilesTable(){
     newline = CreateRowForProfilesTable(NewID,$('#FinYear').val(),'','','','','','','','',0,'highlight_cell' );
     // console.log(newline);
     ProfilesDT.row.add( newline ).draw();
+    ProfilesDT.order([0, 'asc']).draw();
 
     FncFillInInputCorporation(document.getElementById("profDTinpCORP"+NewID));   
     FncFillInInputProdServices(document.getElementById("profDTinpPROD"+NewID));
@@ -467,16 +466,16 @@ function EnterRowToProfilesTable(){
 ///universal prcedure for row fillin
 function CreateRowForProfilesTable(ID,FINYEAR,CORPORATION,COUNTRY,SUPPLIER,GLACC,PROD,CATEGORY,EXPTYPE,CREATOR,NextY, somestyle ){
     var tablerow=[];
-    tablerow.push("<div class='autocomplete' ><div style='display:none'>"+CORPORATION+"</div><input type='text' name='profDTinpCORP"+ID+"' id='profDTinpCORP"+ID+"' class='profDTinpCORP "+somestyle+"' value='"+CORPORATION+"' size='10' onchange='savePROFdt(\""+ID+"\");' ></div>")
+    tablerow.push("<div class='autocomplete' ><div style='display:none'>"+CORPORATION+"</div><input type='text' name='profDTinpCORP"+ID+"' id='profDTinpCORP"+ID+"' class='profDTinpCORP "+somestyle+"' value='"+CORPORATION+"'  onchange='savePROFdt(\""+ID+"\");' ></div>")
     tablerow.push("<div style='display:none'>"+COUNTRY+"</div><select name='profDTselCOUNTRY"+ID+"' id='profDTselCOUNTRY"+ID+"' class='profDTselCOUNTRY "+somestyle+"' "+(SUPPLIER!=="" ? "disabled" : "" )+" onchange='savePROFdt(\""+ID+"\");'></select>");
     FncFillInCountry("#profDTselCOUNTRY"+ID, COUNTRY);
         while(SUPPLIER.indexOf("###")>=0){
             SUPPLIER = SUPPLIER.replace("###", "<br>");
         }
-    tablerow.push("<nobr><input type='image' name='profDTinpMultiSUP"+ID+"' id='profDTinpMultiSUP"+ID+"'  class='profDTinpMultisupCLS' src='images/one2many.png'  width='20' height='20' data-toggle='modal' data-target='#myModalMultiSupp' data-toggle='tooltip' data-placement='right' title='Select suppliers, for actuals calculations'><label id='profDTtxtSUP"+ID+"' for='profDTinpMultiSUP"+ID+"' class='profDTinpMultiSUP' >"+SUPPLIER+"</label></nobr>");
+    tablerow.push("<input type='image' name='profDTinpMultiSUP"+ID+"' id='profDTinpMultiSUP"+ID+"'  style='margin-right:10px;' class='profDTinpMultisupCLS' src='images/one2many.png'  width='20' height='20' data-toggle='modal' data-target='#myModalMultiSupp' data-toggle='tooltip' data-placement='right' title='Select suppliers, for actuals calculations'><span id='profDTtxtSUP"+ID+"' for='profDTinpMultiSUP"+ID+"' class='profDTinpMultiSUP' >"+SUPPLIER+"</span>");
 
-    tablerow.push("<div class='autocomplete' ><div style='display:none'>"+GLACC+"</div><input type='text' name='profDTinpACC"+ID+"' id='profDTinpACC"+ID+"' class='profDTinpACC "+somestyle+"' value='"+GLACC+"' placeholder='"+COUNTRY+"' size='20' onchange='savePROFdt(\""+ID+"\");' ></div>");
-    tablerow.push("<div class='autocomplete' ><div style='display:none'>"+PROD+"</div><input type='text' name='profDTinpPROD"+ID+"' id='profDTinpPROD"+ID+"' class='profDTinpPROD "+somestyle+"' value='"+PROD+"' size='20' onchange='savePROFdt(\""+ID+"\");' ></div>");
+    tablerow.push("<div class='autocomplete' ><div style='display:none'>"+GLACC+"</div><input type='text' name='profDTinpACC"+ID+"' id='profDTinpACC"+ID+"' class='profDTinpACC "+somestyle+"' value='"+GLACC+"' placeholder='"+COUNTRY+"' onchange='savePROFdt(\""+ID+"\");' ></div>");
+    tablerow.push("<div class='autocomplete' ><div style='display:none'>"+PROD+"</div><input type='text' name='profDTinpPROD"+ID+"' id='profDTinpPROD"+ID+"' class='profDTinpPROD "+somestyle+"' value='"+PROD+"' onchange='savePROFdt(\""+ID+"\");' ></div>");
     tablerow.push("<div style='display:none'>"+CATEGORY+"</div><select name='profDTselCATEGORY"+ID+"' id='profDTselCATEGORY"+ID+"' class='profDTselCATEGORY "+somestyle+"' onchange='savePROFdt(\""+ID+"\");'></select>");
     FncFillInCategory("#profDTselCATEGORY"+ID, CATEGORY);
     tmp="<div style='display:none'>"+EXPTYPE+"</div><select name='profDTselEXPTYPE"+ID+"' id='profDTselEXPTYPE"+ID+"' class='profDTselEXPTYPE "+somestyle+"' onchange='savePROFdt(\""+ID+"\");'>"+
@@ -702,22 +701,22 @@ function GetSuppliers(){
 }
 
 //Get Corporations to the global variable
-function GetCorporations(){
-    $.ajax({
-              type: "POST",
-              url: "getDataV2_1.php",
-              dataType: "json",
-              data: { 
-                    QRY:"CORPORATIONS1"
-                  }, 
-              success: function (response) { 
-                CorporationList=response;
-              },
-              error: function (response) {
-                  alert('error');
-              }
-          });
-}
+// function GetCorporations(){
+//     $.ajax({
+//               type: "POST",
+//               url: "getDataV2_1.php",
+//               dataType: "json",
+//               data: { 
+//                     QRY:"CORPORATIONS1"
+//                   }, 
+//               success: function (response) { 
+//                 CorporationList=response;
+//               },
+//               error: function (response) {
+//                   alert('error');
+//               }
+//           });
+// }
 
 //Get Account to the global variable
 function GetAccounts(){
