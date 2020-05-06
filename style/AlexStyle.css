@@ -136,13 +136,25 @@ body{
         /* text-align: left;  */
         /* background-color: #52a9ff;  */
          /*good color 52a9ff*/
-        background-image:  url('../images/wall3.jpg'); /*wall14, wall18, wall3*/
+        background-image:  url('../images/wall3.jpg'); 
         /* background-repeat: no-repeat; */
         background-size: 100%;
         /* background-color: coral; */
         /* background-image: url('backgr4.gif'); */
 
       }
+
+#MyMISTEAM {
+  /* width: 70vw;
+  height: 70vh; */
+  position: relative;
+  overflow: visible;
+  padding:0px;
+  margin:0px;
+  align-items: center;
+  justify-content: center;
+  
+}
 
 .highlight_cell{
   background-color: rgb(198, 245, 198);

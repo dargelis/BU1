@@ -63,7 +63,8 @@
     </script>   
     <script type="text/javascript" src="scripts/gauge.js"></script>
     <script type="text/javascript" src="scripts/d3.v4.min.js"></script>
-
+    <!-- Include lazylinepainter -->
+    <script src="scripts/lazy-line-painter-1.9.6.min.js"></script>
  
 
     <!-- Selectpicker -->
@@ -97,6 +98,9 @@
 
                 <!-- <button onclick="ChangeUser()" id="btnChangeUser">Switch user</button> -->
          </div>
+
+
+
          <form class="form-inline ml-auto">
                 <!-- <input type="text" class="form-control mr-sm-2" placeholder="Search">
                 <button type="submit" class="btn btn-outline-light">Search</button> -->
@@ -170,6 +174,7 @@ function ChangeUser(){
 
 $(document).ready(function() {
     FillInUserDropdown();
+
 });
 
 

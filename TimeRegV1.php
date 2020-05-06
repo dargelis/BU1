@@ -26,7 +26,7 @@ include ('headerV1.php');
                 </thead>
       </table>
     <td valign="top">
-    <svg width = "500" height = "500"></svg>
+    <svg width = "500" height = "500" id="ProjectChart1"></svg>
     <div id="ProjectTBLHeader" class="HeaderText"></div>
     <div id="ProjDetailsObj" style="display: none">
       <table id="ProjDetails" class="display compact ProjDetails"  style="width:250px">
@@ -48,7 +48,10 @@ include ('headerV1.php');
       <br>TO:<select id="AllUsername2">
       </select>
       <!-- <textarea id="editor"><b>test </b> editor</div> -->
-  
+<tr>
+  <td valign="top" colspan="2"> 
+
+        <div id="LazyText"></div>
 </table>
 
 
@@ -88,8 +91,6 @@ include ('headerV1.php');
                     </tfoot>
           </table>
 
-
-
         </div>
         
         <!-- Modal footer -->
@@ -105,6 +106,8 @@ include ('headerV1.php');
   </div>
   
 </div>
+
+  
    
 <?php
 
@@ -616,6 +619,11 @@ $(document).ready(function() {
       getDataForGraph();
     })
 
+
+    $("#LazyText").load("logo.html"); 
+    // let el = document.querySelector('#MyMISTEAM');
+    //           let myAnimation = new LazyLinePainter(el, {"ease":"easeLinear","strokeWidth":1.7,"strokeOpacity":1,"strokeColor":"#222F3D","strokeCap":"square"}); 
+    //           myAnimation.paint(); 
 });
 
 function getDataForGraph() {
@@ -766,8 +774,6 @@ $("#inMSG1").val('');
 
 }
 
-
-
 function drawGraph(data) {
 
 // set the dimensions and margins of the graph
@@ -782,7 +788,8 @@ var x = d3.scaleLinear()
           .range([0, width]);
 // append a 'group' element to 'svg'
 // moves the 'group' element to the top left margin
-var svg = d3.select("svg")
+//var svg = d3.select("svg")
+var svg = d3.select("#ProjectChart1")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")

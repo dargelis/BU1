@@ -94,8 +94,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             </div>
         </form>
-
-
     </div>    
+
+~
 </body>
+
+
+
+<script type="text/javascript">
+
+(function(){ 
+
+  document.onreadystatechange = () => {
+
+    if (document.readyState === 'complete') {
+
+      let el = document.querySelector('#MyMISTEAM');
+      let myAnimation = new LazyLinePainter(el, {"ease":"easeLinear","strokeWidth":1,"strokeOpacity":1,"strokeColor":"#222F3D","strokeCap":"square","delay":0}); 
+      myAnimation.paint(); 
+    }
+  }
+
+})();
+
+</script>
 </html>
