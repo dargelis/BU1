@@ -61,6 +61,7 @@ include ('headerV1.php');
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Works breakdown <div id="WBDDate"></div></h4>
+          <span id="dailyGaugeContainer" class="gaugechart"></span>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -87,7 +88,7 @@ include ('headerV1.php');
                     </tfoot>
           </table>
 
-          <span id="dailyGaugeContainer" class="gaugechart"></span>
+
 
         </div>
         
@@ -430,6 +431,9 @@ function RemoveRow(Obj){
                   , 
                 success: function (response) {
                   console.log(response);
+                    //AFTER RECORDING TO DB create and get data for gauge chart
+                  // createGauges();
+                  updateGauges(username,$("#WBDDate").html());
                 },
                 error: function (response) {
                   alert('DB ins/upd error');
@@ -860,9 +864,9 @@ var svg = d3.select("svg")
 				}
         var range = config.max - config.min;
         
-        config.greenZones = [{ from: config.min, to: config.min + range*0.55 }];
-				config.yellowZones = [{ from: config.min + range*0.55, to: config.min + range*0.66 }];
-				config.redZones = [{ from: config.min + range*0.66, to: config.max }];
+        config.greenZones = [{ from: config.min, to: config.min + range*0.67 }];
+				config.yellowZones = [{ from: config.min + range*0.67, to: config.min + range*0.75 }];
+				config.redZones = [{ from: config.min + range*0.75, to: config.max }];
 				
 				gauges[name] = new Gauge(name + "GaugeContainer", config);
 				gauges[name].render();

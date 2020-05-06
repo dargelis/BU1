@@ -52,7 +52,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.dataTables.min.css" >    
     <link rel="stylesheet" href="https://cdn.datatables.net/scroller/2.0.1/css/scroller.dataTables.min.css" >    
 
-    <!-- D3 -->
+    <!-- D3.js -->
     <!-- <script src = "https://d3js.org/d3.v4.min.js"></script> -->
 
 
