@@ -378,7 +378,7 @@ function saveWBD(){
                 success: function (response) {
                   console.log(response);
                   //AFTER RECORDING TO DB create and get data for gauge chart
-                  createGauges();
+                  // createGauges();
                   updateGauges(username,$("#WBDDate").html());
                 },
                 error: function (response) {

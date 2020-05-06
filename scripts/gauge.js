@@ -28,7 +28,7 @@ function Gauge(placeholderName, configuration)
 		this.config.yellowColor = configuration.yellowColor || "#FF9900";
 		this.config.redColor 	= configuration.redColor || "#DC3912";
 		
-		this.config.transitionDuration = configuration.transitionDuration || 500;
+		this.config.transitionDuration = configuration.transitionDuration || 2000;
 	}
 
 	this.render = function()
