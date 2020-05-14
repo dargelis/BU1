@@ -48,10 +48,10 @@ include ('headerV1.php');
       <br>TO:<select id="AllUsername2">
       </select>
       <!-- <textarea id="editor"><b>test </b> editor</div> -->
-<tr>
+<!-- <tr>
   <td valign="top" colspan="2"> 
-
         <div id="LazyText"></div>
+        $("#LazyText").load("logo.html");  -->
 </table>
 
 
@@ -620,7 +620,7 @@ $(document).ready(function() {
     })
 
 
-    $("#LazyText").load("logo.html"); 
+    
     // let el = document.querySelector('#MyMISTEAM');
     //           let myAnimation = new LazyLinePainter(el, {"ease":"easeLinear","strokeWidth":1.7,"strokeOpacity":1,"strokeColor":"#222F3D","strokeCap":"square"}); 
     //           myAnimation.paint(); 

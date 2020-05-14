@@ -32,9 +32,10 @@ include ('headerV1.php');
 <tr>
   <td>
     <!-- <input type="button" onclick="BuildTree()" value="refresh tree"/> -->
-    <div class="container" style="width:350px;">
-      <div id ="ActivitiesTV"></div>
+    <div class="container" style="width:450;">
+      <div id ="ActivitiesTV" style=" overflow-y:auto; width:400px;height: 600px; border: 1px solid #ccc;"></div>
     </div>
+
   <td valign="top">
   <div style="display:none" id ="ActivityID"></div>
   <div id ="CAPEXOPEX"></div>

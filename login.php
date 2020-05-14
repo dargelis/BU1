@@ -103,19 +103,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <script type="text/javascript">
 
-(function(){ 
+// (function(){ 
 
-  document.onreadystatechange = () => {
+//   document.onreadystatechange = () => {
 
-    if (document.readyState === 'complete') {
+//     if (document.readyState === 'complete') {
 
-      let el = document.querySelector('#MyMISTEAM');
-      let myAnimation = new LazyLinePainter(el, {"ease":"easeLinear","strokeWidth":1,"strokeOpacity":1,"strokeColor":"#222F3D","strokeCap":"square","delay":0}); 
-      myAnimation.paint(); 
-    }
-  }
+//       let el = document.querySelector('#MyMISTEAM');
+//       let myAnimation = new LazyLinePainter(el, {"ease":"easeLinear","strokeWidth":1,"strokeOpacity":1,"strokeColor":"#222F3D","strokeCap":"square","delay":0}); 
+//       myAnimation.paint(); 
+//     }
+//   }
 
-})();
+// })();
 
 </script>
 </html>
