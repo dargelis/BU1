@@ -29,7 +29,7 @@ include ('headerV1.php');
             <span class="blink_me">Accounts loading ....</span>
         </div>
 <tr>
-    <td valign="top">
+    <td valign="top" colspan="2">
         <table id="ProfilesTable" class="table-bordered ProfilesTable" style="display:block" >
                         <thead  >
                         <tr >
@@ -51,7 +51,7 @@ include ('headerV1.php');
           
                       
 
-    <td valign="top">
+   
 
 </table>
 
@@ -68,7 +68,7 @@ include ('headerV1.php');
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-        <table id="MultiSuppDT" class="MultiSuppDT" border=1 >
+        <table id="MultiSuppDT" class="MultiSuppDT" border="1" >
                     <thead >
                         <tr >
                         <th >Supplier ID</th>
@@ -140,7 +140,6 @@ $(document).ready(function() {
     BindProfilesTable();
     BindMultiSuppTable();
     // $('[data-toggle="tooltip"]').tooltip(); 
-    
 
     $('#myModalMultiSupp').on('hidden.bs.modal', function () {
         //save suppliers
@@ -212,6 +211,8 @@ function FncFillInCountry(Obj,DefVal) {
                     for (var i in result) {
                         $(Obj).append('<option value="' + result[i]["COUNTRY"] +'" '+(result[i]["COUNTRY"] == DefVal ? 'selected' : '')+' ' +'>' + result[i]["COUNTRY"] +'</option>');
                     }
+                    //in order to allign header and columns
+                    ProfilesDT.columns.adjust(); 
 
                 },
                 error: function (response) {
@@ -413,7 +414,11 @@ function PopulateProfilesTable() {
             $("#ProfilesTable").show();
 
             //in order to allign header and columns
-            ProfilesDT.columns.adjust(); 
+            ProfilesDT.order(
+                            [0, 'asc']
+                            );
+            ProfilesDT.columns.adjust().draw();
+
         },
         failure: function () {
             $("#ProfilesTable").append(" Error when fetching data please contact administrator");
@@ -486,7 +491,7 @@ function CreateRowForProfilesTable(ID,FINYEAR,CORPORATION,COUNTRY,SUPPLIER,GLACC
     tmp="<nobr><input type='image' id='profDTremove"+ID+"' class='removeCLS' src='images/remove.png'  width='20' height='20' onclick='RemoveRow($(this));' data-toggle='tooltip' data-placement='right' title='Delete profile, from selected FinYear'> "+
             (NextY==0?"<input type='image' id='profDTnextyear"+ID+"' class='nextyearCLS' src='images/nextyear.png'  width='20' height='20' onclick='Copy2NextYear($(this));' data-toggle='tooltip' data-placement='right' title='Copy profile to the next finacial year'> </nobr>":"");
     tablerow.push(tmp);
-
+   
     return tablerow ;
 }
 
