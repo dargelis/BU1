@@ -7,8 +7,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
-include ('headerV1.php');
-   
+include ('headerV1.php'); 
 ?>
 
     <!-- style="width:500px;" -->
@@ -88,7 +87,6 @@ include ('headerV1.php');
             <!-- <div class="loader"></div> -->
             <span class="blink_me">Data loading ....</span>
 </div>
-
 
 <tr id="rowWITHcharts2" class="HideMyRow" >
     <td valign="top" colspan="4"  >

@@ -413,6 +413,7 @@ function PopulateProfilesTable() {
             //show table 
             $("#ProfilesTable").show();
 
+
             //in order to allign header and columns
             ProfilesDT.order(
                             [0, 'asc']

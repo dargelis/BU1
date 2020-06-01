@@ -93,18 +93,12 @@ include ('headerV1.php');
     </div>
   </div>
 
-
-
 </table>
 
 
-
 <?php
-
 include ('footerV1.php');
-
 ?>
-
 
 <script>
 
